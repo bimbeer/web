@@ -10,10 +10,6 @@ import Chakra, {
 // Import Chakra UI Plugin and register it.
 Vue.use(Chakra, {
   extendTheme: {
-    config: {
-      initialColorMode: "dark",
-      useSystemColorMode: false,
-    },
     fonts: {
       heading: '"Poppins"',
       body: '"Poppins"',
