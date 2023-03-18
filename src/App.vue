@@ -1,25 +1,23 @@
 <template>
-  <div class="container">
-    <CBox v-bind="mainStyles[colorMode]">
-      <Login />
-    </CBox>
-  </div>
+  <CBox minH="100vh" minW="100%" v-bind="mainStyles[colorMode]">
+    <Welcome />
+  </CBox>
 </template>
 
 <script>
 import { CBox } from "@chakra-ui/vue";
-
-import Login from "./components/Login.vue";
+import Welcome from "./pages/welcome/Welcome.vue";
 
 export default {
   name: "App",
   components: {
     CBox,
-    Login,
+    Welcome,
   },
   data() {
     return {
       mainStyles: {
+        selectedMode: "",
         dark: {
           bg: "gray.900",
           color: "whiteAlpha.900",
@@ -34,6 +32,12 @@ export default {
 
   inject: ["$chakraColorMode", "$toggleColorMode"],
 
+  provide() {
+    return {
+      mainStyles: this.mainStyles,
+    };
+  },
+
   methods: {},
 
   computed: {
@@ -43,11 +47,22 @@ export default {
   },
 
   mounted() {
-    this.$toggleColorMode();
+    if (this.colorMode === "light") {
+      this.$toggleColorMode();
+      this.mainStyles.selectedMode = "dark";
+    }
   },
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
 </style>
