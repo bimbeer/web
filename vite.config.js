@@ -1,5 +1,12 @@
-const { createVuePlugin } = require("vite-plugin-vue2");
+import { createVuePlugin } from "vite-plugin-vue2";
+import { defineConfig } from "vite";
+import { createSvgPlugin } from "vite-plugin-vue2-svg";
 
-module.exports = {
-  plugins: [createVuePlugin()],
-};
+export default defineConfig({
+  plugins: [createSvgPlugin(), createVuePlugin()],
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
+});
