@@ -1,11 +1,11 @@
 <template>
   <CBox w="100%" minH="100%">
-    <CFlex justify="center" align="center" minH="100%">
-      <CStack maxW="400px" p="2rem" borderRadius="1rem" bg="gray.800">
-        <CHeading size="lg" pb="2rem" textAlign="center">
-          Witaj na stronie Bimbeer gdzie znajdziesz idealnego kompana do
-          smakowania browaru.
-        </CHeading>
+    <Card>
+      <template #heading>
+        Witaj na stronie Bimbeer gdzie znajdziesz idealnego kompana do
+        smakowania browaru.
+      </template>
+      <template #body>
         <CStack spacing="1rem" align="center" w="100%">
           <CLink as="router-link" to="/login">
             <CButton
@@ -25,7 +25,6 @@
               >Zarejestruj się</CButton
             >
           </CLink>
-
           <CDivider w="100%" />
           <CText fontSize="sm">lub</CText>
           <CDivider w="100%" />
@@ -48,8 +47,8 @@
             >
           </CLink>
         </CStack>
-      </CStack>
-    </CFlex>
+      </template>
+    </Card>
   </CBox>
 </template>
 
@@ -66,9 +65,12 @@ import {
   CLink,
 } from "@chakra-ui/vue";
 
+import Card from "@/components/Card.vue";
+
 export default {
   name: "WelcomeCard",
   components: {
+    Card,
     CLink,
     CBox,
     CFlex,
