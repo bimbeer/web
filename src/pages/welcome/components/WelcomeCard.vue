@@ -7,38 +7,46 @@
           smakowania browaru.
         </CHeading>
         <CStack spacing="1rem" align="center" w="100%">
-          <CButton
-            maxW="200px"
-            variant-color="yellow"
-            variant="solid"
-            rounded="2rem"
-            >Zaloguj się
-          </CButton>
-          <CButton
-            maxW="200px"
-            variant-color="yellow"
-            variant="outline"
-            rounded="2rem"
-            >Zarejestruj się</CButton
-          >
+          <CLink as="router-link" to="/login">
+            <CButton
+              maxW="200px"
+              variant-color="yellow"
+              variant="solid"
+              rounded="2rem"
+              >Zaloguj się
+            </CButton>
+          </CLink>
+          <CLink as="router-link" to="/register">
+            <CButton
+              maxW="200px"
+              variant-color="yellow"
+              variant="outline"
+              rounded="2rem"
+              >Zarejestruj się</CButton
+            >
+          </CLink>
 
           <CDivider w="100%" />
           <CText fontSize="sm">lub</CText>
           <CDivider w="100%" />
-          <CButton
-            maxW="200px"
-            variant-color="yellow"
-            variant="outline"
-            rounded="2rem"
-            >Pobierz na komputer</CButton
-          >
-          <CButton
-            maxW="200px"
-            variant-color="yellow"
-            variant="outline"
-            rounded="2rem"
-            >Pobierz na smartfon</CButton
-          >
+          <CLink href="/?" is-external>
+            <CButton
+              maxW="200px"
+              variant-color="yellow"
+              variant="outline"
+              rounded="2rem"
+              >Pobierz na komputer</CButton
+            >
+          </CLink>
+          <CLink href="/?" is-external>
+            <CButton
+              maxW="200px"
+              variant-color="yellow"
+              variant="outline"
+              rounded="2rem"
+              >Pobierz na smartfon</CButton
+            >
+          </CLink>
         </CStack>
       </CStack>
     </CFlex>
@@ -55,11 +63,13 @@ import {
   CHeading,
   CDarkMode,
   CDivider,
+  CLink,
 } from "@chakra-ui/vue";
 
 export default {
   name: "WelcomeCard",
   components: {
+    CLink,
     CBox,
     CFlex,
     CButton,

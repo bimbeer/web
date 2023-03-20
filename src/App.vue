@@ -1,6 +1,6 @@
 <template>
   <CBox minH="100vh" minW="100%" v-bind="mainStyles[colorMode]">
-    <Welcome />
+    <router-view></router-view>
   </CBox>
 </template>
 
