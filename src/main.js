@@ -8,6 +8,9 @@ import Chakra, {
   CReset,
 } from "@chakra-ui/vue";
 
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
 import App from "./App.vue";
 import routes from "./routes";
 
@@ -24,6 +27,13 @@ Vue.use(Chakra, {
       heading: '"Poppins"',
       body: '"Poppins"',
       mono: '"Poppins"',
+    },
+  },
+  icons: {
+    iconPack: "fa",
+    iconSet: {
+      faBars,
+      faXmark,
     },
   },
 });
