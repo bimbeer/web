@@ -13,7 +13,7 @@ import { CBox, CFlex, CImage, CLink } from "@chakra-ui/vue";
 import MyLogo from "@/assets/graphics/logo.svg";
 
 export default {
-  name: "WelcomeHeader",
+  name: "LoginHeader",
   components: {
     CBox,
     CLink,
