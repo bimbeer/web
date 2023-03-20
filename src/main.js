@@ -1,11 +1,20 @@
 import Vue from "vue";
 import App from "./App.vue";
+import VueRouter from "vue-router";
+import routes from "./routes";
 import Chakra, {
   CThemeProvider,
   CColorModeProvider,
   CBox,
   CReset,
 } from "@chakra-ui/vue";
+
+const router = new VueRouter({
+  routes: routes,
+  mode: "history",
+});
+
+Vue.use(VueRouter);
 
 // Import Chakra UI Plugin and register it.
 Vue.use(Chakra, {
@@ -18,9 +27,8 @@ Vue.use(Chakra, {
   },
 });
 
-Vue.config.productionTip = false;
-
 new Vue({
+  router: router,
   render(h) {
     // Mount our application inside the
     // ThemeProvider and ColorModeProvider components :)
