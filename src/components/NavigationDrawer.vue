@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import links from "./NavigationDrawerLinks";
+
 import {
   CButton,
   CDarkMode,
@@ -113,24 +115,7 @@ export default {
     return {
       pathname: this.$route.path,
       isOpen: false,
-      links: [
-        {
-          to: "/main",
-          label: "Strona główna",
-        },
-        {
-          to: "/main/pair",
-          label: "Pary",
-        },
-        {
-          to: "/main/message",
-          label: "Wiadomości",
-        },
-        {
-          to: "/main/profile",
-          label: "Mój profil",
-        },
-      ],
+      links: links,
     };
   },
 

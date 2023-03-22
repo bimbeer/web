@@ -8,8 +8,7 @@ import Chakra, {
   CReset,
 } from "@chakra-ui/vue";
 
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faHeart, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import App from "./App.vue";
 import routes from "./routes";
@@ -34,6 +33,7 @@ Vue.use(Chakra, {
     iconSet: {
       faBars,
       faXmark,
+      faHeart,
     },
   },
 });
