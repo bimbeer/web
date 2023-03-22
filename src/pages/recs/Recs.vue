@@ -1,7 +1,9 @@
 <template>
-  <CBox minH="80vh">
+  <CBox>
     <CStack>
-      <CBox>Profile card</CBox>
+      <CBox>
+        <CardProfile />
+      </CBox>
       <CBox w="100%">
         <CFlex w="100%" align="center" justify="center" gap="12" p="1rem">
           <CIconButton
@@ -40,6 +42,7 @@
 
 <script>
 import { CBox, CFlex, CStack, CIconButton } from "@chakra-ui/vue";
+import CardProfile from "@/components/CardProfile.vue";
 
 export default {
   name: "Recs",
@@ -48,6 +51,7 @@ export default {
     CFlex,
     CStack,
     CIconButton,
+    CardProfile,
   },
 
   methods: {

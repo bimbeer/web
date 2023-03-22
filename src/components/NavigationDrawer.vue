@@ -13,7 +13,9 @@
 
     <CDrawer :isOpen="isOpen" placement="left" :on-close="close">
       <CDrawerOverlay />
-      <CDrawerContent :maxW="{ sm: '100%', md: '50%', lg: '30%' }">
+      <CDrawerContent
+        :maxW="{ base: '100%', sm: '100%', md: '50%', lg: '30%' }"
+      >
         <CDrawerHeader p="1rem">
           <CFlex justify="left">
             <CIconButton

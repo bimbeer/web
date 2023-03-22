@@ -1,5 +1,5 @@
 <template>
-  <CFlex align="center" p="1rem" mb="1rem" bg="gray.800">
+  <CFlex align="center" p="1rem" bg="gray.800" maxH="15vh">
     <div v-if="logged">
       <NavigationDrawer />
     </div>
