@@ -1,33 +1,41 @@
 <template>
-  <CFlex align="center" p="1rem" bg="gray.800" maxH="15vh">
-    <div v-if="logged">
+  <CFlex
+    align="center"
+    p="0.25rem"
+    justify="space-between"
+    px="1rem"
+    bg="gray.800"
+    mb="1rem"
+    w="100%"
+  >
+    <CBox flex="1">
       <NavigationDrawer />
-    </div>
-    <CFlex w="100%" justify="center">
-      <div v-if="!logged">
-        <CLink as="router-link" to="/"><MyLogo class="svg" /></CLink>
-      </div>
-      <div v-else>
-        <MyLogo class="svg" />
-      </div>
-    </CFlex>
+    </CBox>
+    <CLink as="router-link" to="/" flex="1" _hover="">
+      <CFlex justify="center" gap="0.5rem">
+        <CIcon color="yellow.200" size="1.5rem" name="beer-mug-empty" />
+        <CText>Bimbeer</CText>
+      </CFlex>
+    </CLink>
+
+    <CBox flex="1"></CBox>
   </CFlex>
 </template>
 
 <script>
 import NavigationDrawer from "./NavigationDrawer.vue";
 
-import { CFlex, CLink } from "@chakra-ui/vue";
-
-import MyLogo from "@/assets/graphics/logo.svg";
+import { CFlex, CBox, CIcon, CText, CLink } from "@chakra-ui/vue";
 
 export default {
   name: "Header",
   components: {
-    CLink,
     NavigationDrawer,
     CFlex,
-    MyLogo,
+    CLink,
+    CBox,
+    CIcon,
+    CText,
   },
 
   data() {
@@ -40,7 +48,7 @@ export default {
 
 <style scoped>
 .svg {
-  width: 5rem;
-  height: 5rem;
+  width: 3rem;
+  height: 3rem;
 }
 </style>

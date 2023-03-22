@@ -14,6 +14,7 @@ import {
   faXmark,
   faChevronLeft,
   faChevronRight,
+  faBeerMugEmpty,
 } from "@fortawesome/free-solid-svg-icons";
 
 import App from "./App.vue";
@@ -42,6 +43,7 @@ Vue.use(Chakra, {
       faHeart,
       faChevronLeft,
       faChevronRight,
+      faBeerMugEmpty,
     },
   },
 });

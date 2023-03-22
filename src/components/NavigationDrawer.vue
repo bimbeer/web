@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CBox p="1rem" ariaLabel="main-drawer" maxH="20vh">
+    <CBox>
       <CIconButton
         icon="bars"
         @click="isOpen = true"
