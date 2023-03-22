@@ -4,6 +4,7 @@ import Main from "@/pages/main/Main.vue";
 import Pair from "@/pages/pair/Pair.vue";
 import Message from "@/pages/message/Message.vue";
 import Profile from "@/pages/profile/Profile.vue";
+import Recs from "@/pages/recs/Recs.vue";
 
 export default [
   { path: "/", component: Welcome },
@@ -12,6 +13,7 @@ export default [
     path: "/main",
     component: Main,
     children: [
+      { path: "recs", component: Recs },
       { path: "pair", component: Pair },
       { path: "message", component: Message },
       { path: "profile", component: Profile },
