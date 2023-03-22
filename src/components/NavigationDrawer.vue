@@ -32,7 +32,7 @@
               size="sm"
               variant-color="yellow"
               variant="outline"
-              rounded="2rem"
+              rounded="1rem"
             >
               Wyloguj
             </CButton>
@@ -90,6 +90,7 @@ import {
 } from "@chakra-ui/vue";
 
 export default {
+  name: "NavigationDrawer",
   components: {
     CDarkMode,
     CIconButton,
@@ -110,6 +111,7 @@ export default {
   },
   data() {
     return {
+      pathname: this.$route.path,
       isOpen: false,
       links: [
         {
@@ -132,11 +134,15 @@ export default {
     };
   },
 
-  props: ["pathname"],
-
   methods: {
     close() {
       this.isOpen = false;
+    },
+  },
+
+  watch: {
+    "$route.path": function (newPath, oldPath) {
+      this.pathname = newPath;
     },
   },
 };
