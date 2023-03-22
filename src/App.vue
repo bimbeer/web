@@ -1,18 +1,20 @@
 <template>
   <CBox minH="100vh" w="100%" v-bind="mainStyles[colorMode]" ariaLabel="app">
+    <Header />
     <router-view></router-view>
   </CBox>
 </template>
 
 <script>
 import { CBox } from "@chakra-ui/vue";
-import Welcome from "./pages/welcome/Welcome.vue";
+
+import Header from "@/components/Header.vue";
 
 export default {
   name: "App",
   components: {
     CBox,
-    Welcome,
+    Header,
   },
   data() {
     return {
