@@ -3,35 +3,59 @@
     <template #heading> Zaloguj się </template>
     <template #body>
       <CFormControl>
-        <CFormLabel for="email">Email</CFormLabel>
-        <CInput
-          v-model="email"
-          type="email"
-          id="email"
-          mb="2rem"
-          rounded="2rem"
-          placeholder="Wpisz adres email"
-        />
+        <CBox mb="2rem">
+          <CFormLabel for="email">Email</CFormLabel>
+          <CInput
+            v-model="email"
+            type="email"
+            id="email"
+            placeholder="Wpisz adres email"
+            p="1rem"
+            rounded="1rem"
+            mb="0.25rem"
+            size="lg"
+          />
+        </CBox>
 
-        <CFormLabel for="password">Hasło</CFormLabel>
-        <CInput
-          v-model="password"
-          type="password"
-          id="password"
-          mb="2rem"
-          rounded="2rem"
-          placeholder="Wpisz hasło"
-        />
+        <CBox mb="1rem">
+          <CFormLabel for="password">Hasło</CFormLabel>
+          <CInput
+            v-model="password"
+            type="password"
+            id="password"
+            placeholder="Wpisz hasło"
+            p="1rem"
+            rounded="1rem"
+            mb="0.25rem"
+            size="lg"
+          />
+        </CBox>
 
         <CStack>
-          <CButton variant-color="yellow" rounded="2rem" variant="solid">
+          <CButton
+            variant-color="yellow"
+            rounded="1rem"
+            size="lg"
+            variant="solid"
+          >
             Zaloguj
           </CButton>
-          <CButton variant-color="yellow" rounded="2rem" variant="outline">
+          <CBox p="0.5rem"></CBox>
+          <CButton
+            variant-color="yellow"
+            rounded="1rem"
+            size="lg"
+            variant="outline"
+          >
             Zaloguj przez Google
           </CButton>
 
-          <CButton variant-color="yellow" rounded="2rem" variant="outline">
+          <CButton
+            variant-color="yellow"
+            rounded="1rem"
+            size="lg"
+            variant="outline"
+          >
             Zaloguj przez Facebook
           </CButton>
         </CStack>
