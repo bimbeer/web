@@ -3,7 +3,7 @@
     <template #heading> Zaloguj się </template>
     <template #body>
       <CBox mb="2rem">
-        <CFormControl id="email" :isInvalid="errors.email.status">
+        <CFormControl id="email" :isInvalid="!errors.email.status">
           <CFormLabel>Email</CFormLabel>
           <CInput
             v-model="form.email"
@@ -14,12 +14,17 @@
             mb="0.25rem"
             size="lg"
           />
-          <CFormErrorMessage>{{ errors.email.message }}</CFormErrorMessage>
+          <CFormErrorMessage
+            v-for="message in errors.email.messageArray"
+            :key="message"
+          >
+            {{ message }}
+          </CFormErrorMessage>
         </CFormControl>
       </CBox>
 
       <CBox mb="1rem">
-        <CFormControl id="password" :isInvalid="errors.password.status">
+        <CFormControl id="password" :isInvalid="!errors.password.status">
           <CFormLabel>Hasło</CFormLabel>
           <CInput
             v-model="form.password"
@@ -30,7 +35,12 @@
             mb="0.25rem"
             size="lg"
           />
-          <CFormErrorMessage>{{ errors.password.message }}</CFormErrorMessage>
+          <CFormErrorMessage
+            v-for="message in errors.password.messageArray"
+            :key="message"
+          >
+            {{ message }}
+          </CFormErrorMessage>
         </CFormControl>
       </CBox>
 
@@ -40,7 +50,7 @@
           rounded="1rem"
           size="lg"
           variant="solid"
-          :disabled="loginButtonDisable.email || loginButtonDisable.password"
+          :disabled="loginButtonDisable"
         >
           Zaloguj
         </CButton>
@@ -78,6 +88,7 @@
 
 <script>
 import Card from "@/components/Card.vue";
+import Validator from "@/helpers/Validator";
 
 import {
   CButton,
@@ -111,44 +122,39 @@ export default {
   },
   data() {
     return {
+      validator: new Validator(),
       form: {
         email: "",
         password: "",
       },
       errors: {
-        email: { status: false, message: "" },
-        password: { status: false, message: "" },
+        email: { status: true },
+        password: { status: true },
       },
-      loginButtonDisable: {
-        email: true,
-        password: true,
-      },
+
+      loginButtonDisable: true,
     };
   },
 
-  inject: [],
-
   methods: {
     verifyEmail() {
-      if (!this.form.email.includes("@") || !this.form.email.includes(".")) {
-        this.loginButtonDisable.email = true;
-        this.errors.email.status = true;
-        this.errors.email.message = "Nieprawidłowy adres email";
-        return;
-      }
-      this.loginButtonDisable.email = false;
-      this.errors.email.status = false;
+      this.errors.email = this.validator.email(this.form.email);
     },
 
     verifyPassword() {
-      if (this.form.password.length < 8) {
-        this.loginButtonDisable.password = true;
-        this.errors.password.status = true;
-        this.errors.password.message = "Hasło musi posiadać minimum 8 znaków";
+      this.errors.password = this.validator.password(this.form.password);
+    },
+    loginButtonDisableSet() {
+      if (!this.form.email || !this.form.password) {
+        this.loginButtonDisable = true;
         return;
       }
-      this.loginButtonDisable.password = false;
-      this.errors.password.status = false;
+      if (!this.errors.email.status || !this.errors.password.status) {
+        this.loginButtonDisable = true;
+        return;
+      }
+
+      this.loginButtonDisable = false;
     },
   },
 
@@ -156,11 +162,13 @@ export default {
     "form.email": {
       handler() {
         this.verifyEmail();
+        this.loginButtonDisableSet();
       },
     },
     "form.password": {
       handler() {
         this.verifyPassword();
+        this.loginButtonDisableSet();
       },
     },
   },

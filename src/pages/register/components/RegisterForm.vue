@@ -4,7 +4,7 @@
       <template #heading> Zarejestruj się </template>
       <template #body>
         <CBox mb="1rem">
-          <CFormControl id="email" :isInvalid="errors.email.status">
+          <CFormControl id="email" :isInvalid="!errors.email.status">
             <CFormLabel>Email</CFormLabel>
             <CInput
               v-model="form.email"
@@ -15,12 +15,17 @@
               mb="0.25rem"
               size="lg"
             />
-            <CFormErrorMessage>{{ errors.email.message }}</CFormErrorMessage>
+            <CFormErrorMessage
+              v-for="message in errors.email.messageArray"
+              :key="message"
+            >
+              {{ message }}
+            </CFormErrorMessage>
           </CFormControl>
         </CBox>
 
         <CBox mb="1rem">
-          <CFormControl id="password" :isInvalid="errors.password.status">
+          <CFormControl id="password" :isInvalid="!errors.password.status">
             <CFormLabel>Hasło</CFormLabel>
             <CInput
               v-model="form.password"
@@ -31,14 +36,19 @@
               mb="0.25rem"
               size="lg"
             />
-            <CFormErrorMessage>{{ errors.password.message }}</CFormErrorMessage>
+            <CFormErrorMessage
+              v-for="message in errors.password.messageArray"
+              :key="message"
+            >
+              {{ message }}
+            </CFormErrorMessage>
           </CFormControl>
         </CBox>
 
         <CBox mb="1rem">
           <CFormControl
             id="password-replay"
-            :isInvalid="errors.passwordReplay.status"
+            :isInvalid="!errors.passwordReplay.status"
           >
             <CFormLabel>Powtórz hasło</CFormLabel>
             <CInput
@@ -50,9 +60,12 @@
               mb="0.25rem"
               size="lg"
             />
-            <CFormErrorMessage>{{
-              errors.passwordReplay.message
-            }}</CFormErrorMessage>
+            <CFormErrorMessage
+              v-for="message in errors.passwordReplay.messageArray"
+              :key="message"
+            >
+              {{ message }}
+            </CFormErrorMessage>
           </CFormControl>
         </CBox>
 
@@ -63,11 +76,7 @@
             rounded="1rem"
             size="lg"
             variant="solid"
-            :disabled="
-              registerButtonDisable.email ||
-              registerButtonDisable.password ||
-              registerButtonDisable.passwordReplay
-            "
+            :disabled="registerButtonDisable"
           >
             Zarejestruj się
           </CButton>
@@ -99,6 +108,7 @@ import {
 } from "@chakra-ui/vue";
 
 import Card from "@/components/Card.vue";
+import Validator from "@/helpers/Validator";
 
 export default {
   name: "RegisterForm",
@@ -115,6 +125,7 @@ export default {
   },
   data() {
     return {
+      validator: new Validator(),
       form: {
         email: "",
         password: "",
@@ -122,54 +133,50 @@ export default {
       },
 
       errors: {
-        password: { status: false, message: "" },
-        passwordReplay: { status: false, message: "" },
-        email: { status: false, message: "" },
+        password: { status: true },
+        passwordReplay: { status: true },
+        email: { status: true },
       },
 
-      registerButtonDisable: {
-        email: true,
-        password: true,
-        passwordReplay: true,
-      },
+      registerButtonDisable: true,
     };
   },
 
   methods: {
     verifyEmail() {
-      if (!this.form.email.includes("@") || !this.form.email.includes(".")) {
-        this.registerButtonDisable.email = true;
-        this.errors.email.status = true;
-        this.errors.email.message = "Nieprawidłowy adres email";
-        return;
-      }
-      this.errors.email.status = false;
-      this.registerButtonDisable.email = false;
+      this.errors.email = this.validator.email(this.form.email);
     },
 
     verifyPassword() {
-      if (this.form.password.length < 8) {
-        this.registerButtonDisable.password = true;
-        this.errors.password.status = true;
-        this.errors.password.message = "Hasło musi posiadać minimum 8 znaków";
-        return;
-      }
-      this.errors.password.status = false;
-      this.registerButtonDisable.password = false;
+      this.errors.password = this.validator.password(this.form.password);
     },
 
     verifyPasswordReplay() {
+      this.errors.passwordReplay = this.validator.passwordEqual(
+        this.form.password,
+        this.form.passwordReplay
+      );
+    },
+
+    registerButtonDisableSet() {
       if (
-        this.form.password !== this.form.passwordReplay &&
-        this.form.passwordReplay.length > 0
+        !this.form.email ||
+        !this.form.password ||
+        !this.form.passwordReplay
       ) {
-        this.registerButtonDisable.passwordReplay = true;
-        this.errors.passwordReplay.status = true;
-        this.errors.passwordReplay.message = "Hasła się nie zgadzają";
+        this.registerButtonDisable = true;
         return;
       }
-      this.errors.passwordReplay.status = false;
-      this.registerButtonDisable.passwordReplay = false;
+      if (
+        !this.errors.email.status ||
+        !this.errors.password.status ||
+        !this.errors.passwordReplay.status
+      ) {
+        this.registerButtonDisable = true;
+        return;
+      }
+
+      this.registerButtonDisable = false;
     },
   },
 
@@ -177,16 +184,19 @@ export default {
     "form.email": {
       handler() {
         this.verifyEmail();
+        this.registerButtonDisableSet();
       },
     },
     "form.password": {
       handler() {
         this.verifyPassword();
+        this.registerButtonDisableSet();
       },
     },
     "form.passwordReplay": {
       handler() {
         this.verifyPasswordReplay();
+        this.registerButtonDisableSet();
       },
     },
   },
