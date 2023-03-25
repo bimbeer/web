@@ -1,89 +1,91 @@
 <template>
-  <Card>
-    <template #heading> Zaloguj się </template>
-    <template #body>
-      <CBox mb="2rem">
-        <CFormControl id="email" :isInvalid="!errors.email.status">
-          <CFormLabel>Email</CFormLabel>
-          <CInput
-            v-model="form.email"
-            type="email"
-            placeholder="Wpisz adres email"
-            p="1rem"
+  <CFlex justify="center" align="center">
+    <Card>
+      <template #heading> Zaloguj się </template>
+      <template #body>
+        <CBox mb="1rem">
+          <CFormControl id="email" :isInvalid="!errors.email.status">
+            <CFormLabel>Email</CFormLabel>
+            <CInput
+              v-model="form.email"
+              type="email"
+              placeholder="Wpisz adres email"
+              p="1rem"
+              rounded="1rem"
+              mb="0.25rem"
+              size="lg"
+            />
+            <CFormErrorMessage
+              v-for="message in errors.email.messageArray"
+              :key="message"
+            >
+              {{ message }}
+            </CFormErrorMessage>
+          </CFormControl>
+        </CBox>
+
+        <CBox mb="1rem">
+          <CFormControl id="password" :isInvalid="!errors.password.status">
+            <CFormLabel>Hasło</CFormLabel>
+            <CInput
+              v-model="form.password"
+              type="password"
+              placeholder="Wpisz hasło"
+              p="1rem"
+              rounded="1rem"
+              mb="0.25rem"
+              size="lg"
+            />
+            <CFormErrorMessage
+              v-for="message in errors.password.messageArray"
+              :key="message"
+            >
+              {{ message }}
+            </CFormErrorMessage>
+          </CFormControl>
+        </CBox>
+
+        <CStack my="2rem">
+          <CButton
+            variant-color="yellow"
             rounded="1rem"
-            mb="0.25rem"
             size="lg"
-          />
-          <CFormErrorMessage
-            v-for="message in errors.email.messageArray"
-            :key="message"
+            variant="solid"
+            :disabled="loginButtonDisable"
           >
-            {{ message }}
-          </CFormErrorMessage>
-        </CFormControl>
-      </CBox>
-
-      <CBox mb="1rem">
-        <CFormControl id="password" :isInvalid="!errors.password.status">
-          <CFormLabel>Hasło</CFormLabel>
-          <CInput
-            v-model="form.password"
-            type="password"
-            placeholder="Wpisz hasło"
-            p="1rem"
+            Zaloguj
+          </CButton>
+          <CBox p="0.5rem"></CBox>
+          <CButton
+            variant-color="yellow"
             rounded="1rem"
-            mb="0.25rem"
             size="lg"
-          />
-          <CFormErrorMessage
-            v-for="message in errors.password.messageArray"
-            :key="message"
+            variant="outline"
           >
-            {{ message }}
-          </CFormErrorMessage>
-        </CFormControl>
-      </CBox>
+            Zaloguj przez Google
+          </CButton>
 
-      <CStack>
-        <CButton
-          variant-color="yellow"
-          rounded="1rem"
-          size="lg"
-          variant="solid"
-          :disabled="loginButtonDisable"
-        >
-          Zaloguj
-        </CButton>
-        <CBox p="0.5rem"></CBox>
-        <CButton
-          variant-color="yellow"
-          rounded="1rem"
-          size="lg"
-          variant="outline"
-        >
-          Zaloguj przez Google
-        </CButton>
-
-        <CButton
-          variant-color="yellow"
-          rounded="1rem"
-          size="lg"
-          variant="outline"
-        >
-          Zaloguj przez Facebook
-        </CButton>
-      </CStack>
-      <CBox mt="2rem">
-        <CText>
-          Nie masz konta? Zarejestruj się
-          <CLink as="router-link" to="/register" color="yellow.200">
-            tutaj
-          </CLink>
-          .
-        </CText>
-      </CBox>
-    </template>
-  </Card>
+          <CButton
+            variant-color="yellow"
+            rounded="1rem"
+            size="lg"
+            variant="outline"
+          >
+            Zaloguj przez Facebook
+          </CButton>
+        </CStack>
+        <CBox mt="2rem">
+          <CText>
+            Nie masz konta? Zarejestruj się
+            <CLink as="router-link" to="/register" color="yellow.200">
+              tutaj
+            </CLink>
+            .
+          </CText>
+        </CBox>
+      </template>
+    </Card>
+  </CFlex>
 </template>
 
 <script>
