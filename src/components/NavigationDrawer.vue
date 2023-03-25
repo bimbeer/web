@@ -8,13 +8,14 @@
         size="lg"
         color="yellow.200"
         ariaLabel="menu"
+        :_hover="{ transform: 'scale(1.2)' }"
       />
     </CBox>
 
     <CDrawer :isOpen="isOpen" placement="left" :on-close="close">
       <CDrawerOverlay />
       <CDrawerContent
-        :maxW="{ base: '100%', sm: '100%', md: '50%', lg: '30%' }"
+        :minW="{ base: '100%', sm: '100%', md: '50%', lg: '30%' }"
       >
         <CDrawerHeader p="1rem">
           <CFlex justify="left">
@@ -26,6 +27,7 @@
               bg="none"
               color="yellow.200"
               size="lg"
+              :_hover="{ transform: 'scale(1.2)' }"
             />
           </CFlex>
           <CFlex justify="space-between" align="center" direction="row">
@@ -35,6 +37,7 @@
               variant-color="yellow"
               variant="outline"
               rounded="1rem"
+              :_hover="{ transform: 'scale(1.2)' }"
             >
               Wyloguj
             </CButton>
