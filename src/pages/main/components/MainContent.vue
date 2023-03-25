@@ -1,9 +1,6 @@
 <template>
-  <CFlex align="center" justify="center" w="100%" minH="80vh">
+  <CFlex align="center" justify="center">
     <CBox
-      maxW="400px"
-      w="100%"
-      h="70vh"
       rounded="1rem"
       bg="gray.800"
       :bgImage="require('@/assets/graphics/test.png')"
@@ -14,7 +11,6 @@
       <CFlex
         direction="column"
         rounded="1rem"
-        h="100%"
         bgGradient="linear(to-b, whiteAlpha.50 60%, blackAlpha.900 100%)"
         justify="space-between"
       >
