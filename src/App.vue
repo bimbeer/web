@@ -1,5 +1,5 @@
 <template>
-  <CBox minH="100vh" w="100%" v-bind="mainStyles[colorMode]" ariaLabel="app">
+  <CBox minH="100svh" w="100%" v-bind="mainStyles[colorMode]" ariaLabel="app">
     <Header />
     <router-view></router-view>
   </CBox>
