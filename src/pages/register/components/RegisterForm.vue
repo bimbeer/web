@@ -1,5 +1,5 @@
 <template>
-  <CBox w="100%">
+  <CFlex justify="center" align="center">
     <Card>
       <template #heading> Zarejestruj się </template>
       <template #body>
@@ -69,9 +69,8 @@
           </CFormControl>
         </CBox>
 
-        <CBox my="2rem" w="100%">
+        <CStack my="2rem">
           <CButton
-            w="100%"
             variant-color="yellow"
             rounded="1rem"
             size="lg"
@@ -80,24 +79,21 @@
           >
             Zarejestruj się
           </CButton>
-        </CBox>
-        <CBox mt="2rem">
-          <CText>
-            Masz już konto? Zaloguj się
-            <CLink as="router-link" to="/login" color="yellow.200">
-              tutaj
-            </CLink>
-            .
-          </CText>
-        </CBox>
-      </template></Card
-    >
-  </CBox>
+        </CStack>
+        <CText>
+          Masz już konto? Zaloguj się
+          <CLink as="router-link" to="/login" color="yellow.200"> tutaj </CLink>
+          .
+        </CText>
+      </template>
+    </Card>
+  </CFlex>
 </template>
 
 <script>
 import {
   CBox,
+  CFlex,
   CInput,
   CFormControl,
   CFormLabel,
@@ -105,6 +101,7 @@ import {
   CText,
   CLink,
   CFormErrorMessage,
+  CStack,
 } from "@chakra-ui/vue";
 
 import Card from "@/components/Card.vue";
@@ -113,6 +110,7 @@ import Validator from "@/helpers/Validator";
 export default {
   name: "RegisterForm",
   components: {
+    CStack,
     CText,
     CLink,
     CButton,
@@ -121,6 +119,7 @@ export default {
     CFormControl,
     CFormLabel,
     CFormErrorMessage,
+    CFlex,
     Card,
   },
   data() {

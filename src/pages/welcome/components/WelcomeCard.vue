@@ -1,31 +1,33 @@
 <template>
-  <CBox w="100%" minH="100%">
+  <CFlex justify="center" align="center">
     <Card>
       <template #heading>
         Witaj na stronie Bimbeer gdzie znajdziesz idealnego kompana do
         smakowania browaru.
       </template>
       <template #body>
-        <CStack spacing="1rem" align="center" w="100%">
-          <CLink as="router-link" to="/login" w="100%" :_hover="{}">
-            <CButton variant-color="yellow" rounded="1rem" size="lg" w="100%"
-              >Zaloguj się
+        <CStack my="1rem">
+          <CLink as="router-link" to="/login" :_hover="{}">
+            <CButton variant-color="yellow" rounded="1rem" size="lg" w="100%">
+              Zaloguj się
             </CButton>
           </CLink>
-          <CLink as="router-link" to="/register" w="100%" :_hover="{}">
+          <CLink as="router-link" to="/register" :_hover="{}">
             <CButton
               rounded="1rem"
               size="lg"
-              w="100%"
               variant-color="yellow"
               variant="outline"
+              w="100%"
               >Zarejestruj się</CButton
             >
           </CLink>
-          <CDivider w="100%" />
-          <CText fontSize="sm">lub</CText>
-          <CDivider w="100%" />
-          <CLink href="/?" is-external w="100%" :_hover="{}">
+          <CBox pb="1rem" />
+          <CDivider />
+          <CText fontSize="sm" textAlign="center">lub</CText>
+          <CDivider />
+          <CBox pb="1rem" />
+          <CLink href="/?" is-external :_hover="{}">
             <CButton
               variant-color="yellow"
               variant="outline"
@@ -35,20 +37,20 @@
               >Pobierz na komputer</CButton
             >
           </CLink>
-          <CLink href="/?" is-external w="100%" :_hover="{}">
+          <CLink href="/?" is-external :_hover="{}">
             <CButton
               rounded="1rem"
               size="lg"
-              w="100%"
               variant-color="yellow"
               variant="outline"
+              w="100%"
               >Pobierz na smartfon</CButton
             >
           </CLink>
         </CStack>
       </template>
     </Card>
-  </CBox>
+  </CFlex>
 </template>
 
 <script>
