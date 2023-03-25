@@ -1,5 +1,5 @@
 <template>
-  <CBox minH="85vh">
+  <CBox>
     <router-view></router-view>
   </CBox>
 </template>
