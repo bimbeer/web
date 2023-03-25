@@ -15,4 +15,9 @@ export default [
     to: "/main/profile",
     label: "Mój profil",
   },
+
+  {
+    to: "/main/geo",
+    label: "Geo",
+  },
 ];

@@ -6,6 +6,7 @@ import Message from "@/pages/message/Message.vue";
 import Profile from "@/pages/profile/Profile.vue";
 import Recs from "@/pages/recs/Recs.vue";
 import Register from "@/pages/register/Register.vue";
+import Geo from "@/pages/geo/Geo.vue";
 
 export default [
   { path: "/", component: Welcome },
@@ -19,6 +20,7 @@ export default [
       { path: "pair", component: Pair },
       { path: "message", component: Message },
       { path: "profile", component: Profile },
+      { path: "geo", component: Geo },
     ],
   },
 ];
