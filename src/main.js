@@ -7,6 +7,8 @@ import Chakra, {
   CBox,
   CReset,
 } from "@chakra-ui/vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
 
 import {
   faBars,
@@ -16,6 +18,7 @@ import {
   faChevronRight,
   faBeerMugEmpty,
   faCircleInfo,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
 import App from "./App.vue";
@@ -27,6 +30,8 @@ const router = new VueRouter({
 });
 
 Vue.use(VueRouter);
+
+Vue.use(VueAxios, axios);
 
 Vue.use(Chakra, {
   extendTheme: {
@@ -46,6 +51,7 @@ Vue.use(Chakra, {
       faChevronRight,
       faCircleInfo,
       faBeerMugEmpty,
+      faSpinner,
     },
   },
 });
