@@ -1,43 +1,39 @@
 <template>
-  <CBox>
-    <CStack>
-      <CBox>
-        <CardProfile />
-      </CBox>
-      <CBox w="100%">
-        <CFlex w="100%" align="center" justify="center" gap="12" p="1rem">
-          <CIconButton
-            type="button"
-            ariaLabel="not-like"
-            icon="xmark"
-            variant-color="red"
-            variant="outline"
-            size="lg"
-            rounded="50rem"
-            transform="scale(1.2)"
-            :_hover="{
-              transform: 'scale(1.5)',
-            }"
-            @click.prevent="notLike"
-          />
-          <CIconButton
-            type="button"
-            ariaLabel="like"
-            icon="heart"
-            variant-color="green"
-            variant="outline"
-            size="lg"
-            rounded="50rem"
-            transform="scale(1.2)"
-            :_hover="{
-              transform: 'scale(1.5)',
-            }"
-            @click.prevent="like"
-          />
-        </CFlex>
-      </CBox>
-    </CStack>
-  </CBox>
+  <CFlex justify="center" align="center" direction="column">
+    <CardProfile />
+    <CBox>
+      <CFlex align="center" justify="center" gap="12" p="3rem">
+        <CIconButton
+          type="button"
+          ariaLabel="not-like"
+          icon="xmark"
+          variant-color="red"
+          variant="outline"
+          size="lg"
+          rounded="50rem"
+          transform="scale(1.2)"
+          :_hover="{
+            transform: 'scale(1.5)',
+          }"
+          @click.prevent="notLike"
+        />
+        <CIconButton
+          type="button"
+          ariaLabel="like"
+          icon="heart"
+          variant-color="green"
+          variant="outline"
+          size="lg"
+          rounded="50rem"
+          transform="scale(1.2)"
+          :_hover="{
+            transform: 'scale(1.5)',
+          }"
+          @click.prevent="like"
+        />
+      </CFlex>
+    </CBox>
+  </CFlex>
 </template>
 
 <script>
