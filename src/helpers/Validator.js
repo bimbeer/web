@@ -1,4 +1,6 @@
 export default class Validator {
+  #MATURE_AGE = 18;
+
   constructor() {}
 
   email(email) {
@@ -50,6 +52,28 @@ export default class Validator {
 
     result.message = this.#arrayToString(result.messageArray);
     return result;
+  }
+
+  isEmpty(string) {
+    if (string === "" || string === undefined || string === null) {
+      return true;
+    }
+    return false;
+  }
+
+  isMoreThan(string, len) {
+    if (string.length > len) return true;
+    return false;
+  }
+
+  isLessThan(string, len) {
+    if (string.length < len) return true;
+    return false;
+  }
+
+  isAgeLessThanMature(age) {
+    if (parseInt(age) < this.#MATURE_AGE) return true;
+    return false;
   }
 
   #arrayToString(array) {
