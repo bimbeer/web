@@ -1,7 +1,7 @@
 <template>
   <CBox>
     <CBox>
-      <CFormControl id="city">
+      <CFormControl id="city" :isInvalid="errors.city.status">
         <CFormLabel>Your city</CFormLabel>
         <CInput
           v-model="city"
@@ -11,6 +11,7 @@
           rounded="1rem"
           size="lg"
         />
+        <CFormErrorMessage>{{ errors.city.message }}</CFormErrorMessage>
       </CFormControl>
     </CBox>
 
@@ -98,6 +99,7 @@ import {
   CFlex,
   CList,
   CListItem,
+  CFormErrorMessage,
 } from "@chakra-ui/vue";
 
 export default {
@@ -110,6 +112,7 @@ export default {
     CFlex,
     CList,
     CListItem,
+    CFormErrorMessage,
   },
 
   data() {
@@ -167,7 +170,11 @@ export default {
     },
   },
 
-  props: ["form"],
+  props: ["form", "errors"],
+
+  mounted() {
+    this.debounceInput = useDebounceInput();
+  },
 };
 </script>
 
