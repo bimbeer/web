@@ -54,6 +54,11 @@ export default class Validator {
     return result;
   }
 
+  isEqual(string, string2) {
+    if (string === string2) return true;
+    return false;
+  }
+
   isEmpty(string) {
     if (string === "" || string === undefined || string === null) {
       return true;
