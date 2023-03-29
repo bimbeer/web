@@ -87,6 +87,7 @@
 <script>
 import Validator from "@/helpers/Validator";
 import useDebounceInput from "@/hooks/useDebounceInput";
+import { geohashForLocation } from "geofire-common";
 import axios from "axios";
 import {
   CBox,
@@ -149,19 +150,24 @@ export default {
 
     handleCitySelect(cityId) {
       let selectedCity = this.cities.find((city) => city.id === cityId);
+
       this.form.city.label = selectedCity.address.label;
-      this.form.city.position = selectedCity.position;
+      this.form.city.position.coordinates = [
+        selectedCity.position.lat,
+        selectedCity.position.lng,
+      ];
+      this.form.city.position.geohash = geohashForLocation(
+        this.form.city.position.coordinates
+      );
+
       this.city = this.form.city.label;
       this.cities = [];
+
       console.log(this.form.city);
     },
   },
 
   props: ["form"],
-
-  mounted() {
-    this.debounceInput = useDebounceInput();
-  },
 };
 </script>
 
