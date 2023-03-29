@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <ProfileInfo :form="form" :nextStep="nextStep" v-if="step === 1" />
+    <ProfileInfo :form="form" :nextStep="nextStep" v-if="step === 1" />
     <ProfileAvatar
       :form="form"
       :nextStep="nextStep"
@@ -12,12 +12,12 @@
       :nextStep="nextStep"
       :prevStep="prevStep"
       v-if="step === 3"
-    /> -->
+    />
     <ProfileLocation
       :form="form"
       :finalStep="finalStep"
       :prevStep="prevStep"
-      v-if="step === 1"
+      v-if="step === 4"
     />
   </div>
 </template>
@@ -28,6 +28,7 @@ import ProfileAvatar from "./components/ProfileAvatar.vue";
 import ProfileBeers from "./components/ProfileBeers.vue";
 import ProfileLocation from "./components/ProfileLocation.vue";
 import useCoordinatesCalculate from "@/hooks/useCoordinatesCalculate";
+import { addProfile, getProfilesByRange } from "@/firebase/profileFirebase";
 
 export default {
   components: {
@@ -39,7 +40,7 @@ export default {
 
   data() {
     return {
-      step: 1,
+      step: 4,
       form: {
         name: "",
         lastname: "",
@@ -49,12 +50,14 @@ export default {
         gender: "",
         range: null,
         avatar: "",
+        intrested: "",
+        local: null,
         beers: [],
         city: {
           label: "",
           position: {
-            lat: null,
-            lng: null,
+            geohash: "",
+            coordinates: [0, 0],
           },
         },
       },
@@ -71,13 +74,15 @@ export default {
     },
 
     finalStep() {
-      console.log(
-        this.coordinatesCalculate(
-          this.form.city.position.lat,
-          this.form.city.position.lng,
-          this.form.range
-        )
-      );
+      // console.log(
+      //   this.coordinatesCalculate(
+      //     this.form.city.position.lat,
+      //     this.form.city.position.lng,
+      //     this.form.range
+      //   )
+      // );
+      // addProfile(this.form);
+      getProfilesByRange(this.form.city.position.coordinates, this.form.range);
     },
   },
 
