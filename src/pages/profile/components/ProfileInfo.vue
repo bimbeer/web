@@ -194,7 +194,7 @@ export default {
   props: ["form", "nextStep"],
 
   methods: {
-    handleNext(e) {
+    handleNext() {
       this.errors = { ...cleanErrors };
 
       let isErr = false;

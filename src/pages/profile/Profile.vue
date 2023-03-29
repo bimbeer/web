@@ -15,10 +15,11 @@
     />
     <ProfileLocation
       :form="form"
-      :finalStep="finalStep"
+      :nextStep="nextStep"
       :prevStep="prevStep"
       v-if="step === 4"
     />
+    <ProfileCreate :form="form" v-if="step === 5" />
   </div>
 </template>
 
@@ -27,6 +28,8 @@ import ProfileInfo from "./components/ProfileInfo.vue";
 import ProfileAvatar from "./components/ProfileAvatar.vue";
 import ProfileBeers from "./components/ProfileBeers.vue";
 import ProfileLocation from "./components/ProfileLocation.vue";
+import ProfileCreate from "./components/ProfileCreate.vue";
+
 import { addProfile, getProfilesByRange } from "@/firebase/profileFirebase";
 
 export default {
@@ -35,11 +38,12 @@ export default {
     ProfileAvatar,
     ProfileBeers,
     ProfileLocation,
+    ProfileCreate,
   },
 
   data() {
     return {
-      step: 4,
+      step: 1,
       form: {
         name: "",
         lastname: "",
@@ -73,6 +77,7 @@ export default {
     },
 
     finalStep() {
+      console.log(this.form);
       // console.log(
       //   this.coordinatesCalculate(
       //     this.form.city.position.lat,
@@ -81,12 +86,8 @@ export default {
       //   )
       // );
       // addProfile(this.form);
-      getProfilesByRange(this.form.city.position.coordinates, this.form.range);
+      // getProfilesByRange(this.form.city.position.coordinates, this.form.range);
     },
-  },
-
-  mounted() {
-    this.coordinatesCalculate = useCoordinatesCalculate();
   },
 };
 </script>
