@@ -71,7 +71,6 @@ export default {
     },
 
     finalStep() {
-      console.log(this.form);
       console.log(
         this.coordinatesCalculate(
           this.form.city.position.lat,
