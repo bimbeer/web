@@ -27,7 +27,6 @@ import ProfileInfo from "./components/ProfileInfo.vue";
 import ProfileAvatar from "./components/ProfileAvatar.vue";
 import ProfileBeers from "./components/ProfileBeers.vue";
 import ProfileLocation from "./components/ProfileLocation.vue";
-import useCoordinatesCalculate from "@/hooks/useCoordinatesCalculate";
 import { addProfile, getProfilesByRange } from "@/firebase/profileFirebase";
 
 export default {
