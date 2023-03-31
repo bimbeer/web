@@ -76,6 +76,7 @@
             size="lg"
             variant="solid"
             :disabled="registerButtonDisable"
+            @click="signUp(form.email, form.password)"
           >
             Zarejestruj się
           </CButton>
@@ -104,6 +105,7 @@ import {
   CStack,
 } from "@chakra-ui/vue";
 
+import { signUp } from "@/firebase/authFirebase";
 import Card from "@/components/Card.vue";
 import Validator from "@/helpers/Validator";
 
@@ -142,6 +144,7 @@ export default {
   },
 
   methods: {
+    signUp,
     verifyEmail() {
       this.errors.email = this.validator.email(this.form.email);
     },
