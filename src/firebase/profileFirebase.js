@@ -10,7 +10,7 @@ import {
 
 import { geohashQueryBounds, distanceBetween } from "geofire-common";
 
-import db from "@/firebase";
+import { db } from "@/firebase";
 
 const colRef = collection(db, "profile");
 

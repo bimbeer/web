@@ -52,6 +52,7 @@
             size="lg"
             variant="solid"
             :disabled="loginButtonDisable"
+            @click="signIn(form.email, form.password)"
           >
             Zaloguj
           </CButton>
@@ -61,6 +62,7 @@
             rounded="1rem"
             size="lg"
             variant="outline"
+            @click="signInWithGoogle"
           >
             Zaloguj przez Google
           </CButton>
@@ -91,6 +93,7 @@
 <script>
 import Card from "@/components/Card.vue";
 import Validator from "@/helpers/Validator";
+import { signInWithGoogle, signIn } from "@/firebase/authFirebase";
 
 import {
   CButton,
@@ -139,6 +142,9 @@ export default {
   },
 
   methods: {
+    signInWithGoogle,
+    signIn,
+
     verifyEmail() {
       this.errors.email = this.validator.email(this.form.email);
     },
