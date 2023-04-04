@@ -15,7 +15,7 @@ import { db } from "@/firebase";
 const colRef = collection(db, "profile");
 
 export async function addProfile(profile) {
-  const docRef = await addDoc(colRef, profile);
+  const docRef = await addDoc(colRef, { ...profile.getAllData() });
 }
 
 export async function getProfilesByRange(point, range) {
@@ -27,7 +27,7 @@ export async function getProfilesByRange(point, range) {
   bounds.forEach((b) => {
     const q = query(
       colRef,
-      orderBy("city.position.geohash"),
+      orderBy("location.position.geohash"),
       startAt(b[0]),
       endAt(b[1])
     );
@@ -39,7 +39,7 @@ export async function getProfilesByRange(point, range) {
       const matchingDocs = [];
       snapshots.map((snap) => {
         snap.forEach((doc) => {
-          const docPoint = doc.data().city?.position?.coordinates;
+          const docPoint = doc.data().location?.position?.coordinates;
           const distanceInM = distanceBetween(docPoint, point) * 1000;
           if (distanceInM <= radiusInM) matchingDocs.push(doc.data());
         });

@@ -70,7 +70,7 @@
           v-if="
             !citiesLoading &&
             cities.length === 0 &&
-            city !== form.city?.label &&
+            city !== profile.getLocation()?.label &&
             city
           "
           bg="gray.800"
@@ -89,6 +89,8 @@
 import Validator from "@/helpers/Validator";
 import useDebounceInput from "@/hooks/useDebounceInput";
 import { geohashForLocation } from "geofire-common";
+import LocationModel from "@/models/LocationModel";
+
 import axios from "axios";
 import {
   CBox,
@@ -139,11 +141,14 @@ export default {
 
     handleCityInput(string) {
       if (this.validator.isEmpty(string)) {
+        this.profile.setLocation(null);
         this.cities = [];
         this.citiesLoading = false;
         return;
       }
-      if (this.validator.isEqual(this.form.city?.label, this.city)) {
+      if (
+        this.validator.isEqual(this.profile.getLocation()?.label, this.city)
+      ) {
         this.citiesLoading = false;
         return;
       }
@@ -153,24 +158,20 @@ export default {
 
     handleCitySelect(cityId) {
       let selectedCity = this.cities.find((city) => city.id === cityId);
-
-      this.form.city.label = selectedCity.address.label;
-      this.form.city.position.coordinates = [
+      const location = new LocationModel(
+        selectedCity.address.label,
         selectedCity.position.lat,
-        selectedCity.position.lng,
-      ];
-      this.form.city.position.geohash = geohashForLocation(
-        this.form.city.position.coordinates
+        selectedCity.position.lng
       );
 
-      this.city = this.form.city.label;
-      this.cities = [];
+      this.profile.setLocation(location);
 
-      console.log(this.form.city);
+      this.city = this.profile.getLocation()?.label;
+      this.cities = [];
     },
   },
 
-  props: ["form", "errors"],
+  props: ["profile", "errors"],
 
   mounted() {
     this.debounceInput = useDebounceInput();

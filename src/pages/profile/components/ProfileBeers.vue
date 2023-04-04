@@ -42,7 +42,7 @@ import { CBox, CButton, CFlex } from "@chakra-ui/vue";
 
 export default {
   components: { CButton, Card, CFlex, CBox },
-  props: ["nextStep", "prevStep"],
+  props: ["nextStep", "prevStep", "profile"],
 };
 </script>
 

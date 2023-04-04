@@ -9,6 +9,9 @@
 import { CBox } from "@chakra-ui/vue";
 
 import Header from "@/components/Header.vue";
+import LocationModel from "@/models/LocationModel";
+import LikeBeerModel from "@/models/LikeBeerModel";
+import ProfileModel from "@/models/ProfileModel";
 
 export default {
   name: "App",
