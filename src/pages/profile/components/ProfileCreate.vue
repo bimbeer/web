@@ -23,10 +23,9 @@ import { addProfile } from "@/firebase/profileFirebase";
 
 export default {
   components: { CButton, Card, CFlex, CBox, CIcon },
-  props: ["form"],
+  props: ["profile"],
   mounted() {
-    console.log(this.form);
-    addProfile(this.form);
+    addProfile(this.profile);
   },
 };
 </script>

@@ -12,7 +12,7 @@
         >
           <img v-if="localFileUrl" :src="localFileUrl" class="avatar-preview" />
           <CAvatar
-            :name="form.username"
+            :name="profile.username"
             v-if="!localFileUrl"
             class="avatar-preview"
           />
@@ -74,7 +74,7 @@ import { CBox, CButton, CFlex, CInput, CAvatar, CImage } from "@chakra-ui/vue";
 
 export default {
   components: { CButton, Card, CFlex, CBox, CInput, CAvatar, CImage },
-  props: ["nextStep", "prevStep", "form"],
+  props: ["nextStep", "prevStep", "profile"],
 
   data() {
     return {

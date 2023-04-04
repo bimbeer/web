@@ -4,34 +4,36 @@
       <template #heading> Profile information </template>
       <template #body>
         <CBox mb="1rem">
-          <CFormControl id="name" :isInvalid="errors.name.status">
-            <CFormLabel>Name</CFormLabel>
+          <CFormControl id="name" :isInvalid="errors.firstName.status">
+            <CFormLabel>First name</CFormLabel>
             <CInput
-              v-model="form.name"
+              v-model="profile.firstName"
               type="text"
-              placeholder="Enter name"
+              placeholder="Enter first name"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
               size="lg"
             />
-            <CFormErrorMessage>{{ errors.name.message }}</CFormErrorMessage>
+            <CFormErrorMessage>{{
+              errors.firstName.message
+            }}</CFormErrorMessage>
           </CFormControl>
         </CBox>
 
         <CBox mb="1rem">
-          <CFormControl id="lastname" :isInvalid="errors.lastname.status">
-            <CFormLabel>Lastname</CFormLabel>
+          <CFormControl id="lastname" :isInvalid="errors.lastName.status">
+            <CFormLabel>Last name</CFormLabel>
             <CInput
-              v-model="form.lastname"
+              v-model="profile.lastName"
               type="text"
-              placeholder="Enter lastname"
+              placeholder="Enter last name"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
               size="lg"
             />
-            <CFormErrorMessage>{{ errors.lastname.message }}</CFormErrorMessage>
+            <CFormErrorMessage>{{ errors.lastName.message }}</CFormErrorMessage>
           </CFormControl>
         </CBox>
 
@@ -39,7 +41,7 @@
           <CFormControl id="username" :isInvalid="errors.username.status">
             <CFormLabel>Username</CFormLabel>
             <CInput
-              v-model="form.username"
+              v-model="profile.username"
               type="text"
               placeholder="Enter username"
               p="1rem"
@@ -55,7 +57,7 @@
           <CFormControl id="age" :isInvalid="errors.age.status">
             <CFormLabel>Age</CFormLabel>
             <CInput
-              v-model="form.age"
+              v-model="profile.age"
               type="number"
               placeholder="Enter age"
               p="1rem"
@@ -71,7 +73,7 @@
           <CFormControl id="description" :isInvalid="errors.description.status">
             <CFormLabel>Description</CFormLabel>
             <CTextarea
-              v-model="form.description"
+              v-model="profile.description"
               type="text"
               placeholder="Write something about yourself"
               p="1rem"
@@ -88,7 +90,7 @@
         <CBox mb="1rem">
           <CFormControl id="gender" :isInvalid="errors.gender.status">
             <CFormLabel>Gender</CFormLabel>
-            <CRadioGroup v-model="form.gender">
+            <CRadioGroup v-model="profile.gender">
               <CRadio value="male">Male</CRadio>
               <CRadio value="female">Female</CRadio>
               <CRadio value="other">Other</CRadio>
@@ -117,7 +119,6 @@
 
 <script>
 import Card from "@/components/Card.vue";
-import Normalizer from "@/helpers/Normalizer";
 import Validator from "@/helpers/Validator";
 import {
   CLink,
@@ -136,12 +137,12 @@ import {
 } from "@chakra-ui/vue";
 
 const cleanErrors = {
-  name: {
+  firstName: {
     status: false,
     message: "",
   },
 
-  lastname: {
+  lastName: {
     status: false,
     message: "",
   },
@@ -184,14 +185,13 @@ export default {
 
   data() {
     return {
-      normalizer: new Normalizer(),
       validator: new Validator(),
 
       errors: { ...cleanErrors },
     };
   },
 
-  props: ["form", "nextStep"],
+  props: ["profile", "nextStep"],
 
   methods: {
     handleNext() {
@@ -199,19 +199,20 @@ export default {
 
       let isErr = false;
 
-      for (let key in this.form) {
-        if (this.validator.isEmpty(this.form[key])) {
-          isErr = true;
-          this.errors[key] = {
-            status: true,
-            message: `${this.normalizer.firstLetterCapital(
-              key
-            )} can't be empty`,
-          };
+      for (let property in this.profile) {
+        let propStr = property.toString();
+        if (propStr in this.errors) {
+          if (this.validator.isEmpty(this.profile[propStr])) {
+            isErr = true;
+            this.errors[propStr] = {
+              status: true,
+              message: `${propStr} can't be empty`,
+            };
+          }
         }
       }
 
-      if (this.validator.isAgeLessThanMature(this.form.age)) {
+      if (this.validator.isAgeLessThanMature(this.profile.age)) {
         this.errors.age = {
           status: true,
           message: "You must be 18 years old to create a profile",
@@ -222,14 +223,14 @@ export default {
       const minDescLen = 50;
       const maxDescLen = 200;
 
-      if (this.validator.isLessThan(this.form.description, minDescLen)) {
+      if (this.validator.isLessThan(this.profile.description, minDescLen)) {
         this.errors.description = {
           status: true,
           message: `The description must contain at least ${minDescLen} characters`,
         };
       }
 
-      if (this.validator.isMoreThan(this.form.description, maxDescLen)) {
+      if (this.validator.isMoreThan(this.profile.description, maxDescLen)) {
         this.errors.description = {
           status: true,
           message: `The description can contain up to ${maxDescLen} characters`,
@@ -240,10 +241,8 @@ export default {
 
       // if (isErr) return;
 
-      this.form.name = this.normalizer.firstLetterCapital(this.form.name);
-      this.form.lastname = this.normalizer.firstLetterCapital(
-        this.form.lastname
-      );
+      this.profile.normalize();
+      console.log(this.profile);
 
       this.nextStep();
     },
