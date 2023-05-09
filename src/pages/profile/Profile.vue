@@ -42,7 +42,7 @@ export default {
 
   data() {
     return {
-      step: 5,
+      step: 1,
       profile: new ProfileModel(),
     };
   },

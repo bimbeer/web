@@ -1,26 +1,26 @@
 <template>
   <CBox maxW="450px" w="100%" h="600px">
     <CBox
-      bg="black"
+      bg="blackAlpha.600"
       rounded="1rem"
       overflow="hidden"
-      :bgImage="require('@/assets/graphics/test.png')"
+      :bgImage="profile.beers[showPhotoNumber].link"
       bgPos="center"
       bgRepeat="no-repeat"
-      bgSize="cover"
+      bgSize="contain"
       h="100%"
     >
       <CFlex w="100%" h="100%" direction="column" position="relative">
         <CBox flex="1" p="0.5rem" px="1rem">
           <CFlex gap="2" justify="center" align="center" h="10px">
             <CBox
-              v-for="photo in photos"
+              v-for="(photo, index) in photos"
               :key="photo"
               :class="
-                showPhotoNumber === photo ? 'animationShow' : 'animationNotShow'
+                showPhotoNumber === index ? 'animationShow' : 'animationNotShow'
               "
-              :bg="showPhotoNumber === photo ? 'yellow.200' : 'blackAlpha.400'"
-              :h="showPhotoNumber === photo ? '8px' : '4px'"
+              :bg="showPhotoNumber === index ? 'yellow.200' : 'blackAlpha.400'"
+              :h="showPhotoNumber === index ? '8px' : '4px'"
               w="100%"
               rounded="50rem"
             >
@@ -38,7 +38,7 @@
             <CIconButton
               size="lg"
               icon="chevron-left"
-              bg=""
+              variantColor="yellow"
               :_hover="{ transform: 'scale(1.3)', color: 'blackAlpha.800' }"
               @click="prevPhoto()"
               ariaLabel="prev-photo"
@@ -46,7 +46,7 @@
             <CIconButton
               size="lg"
               icon="chevron-right"
-              bg=""
+              variantColor="yellow"
               :_hover="{ transform: 'scale(1.3)', color: 'blackAlpha.800' }"
               @click="nextPhoto()"
               ariaLabel="next-photo"
@@ -62,8 +62,12 @@
         >
           <CFlex p="1rem" py="2rem" justify="space-between">
             <CBox>
-              <CHeading size="lg">{userName}, {userAge}</CHeading>
-              <CText fontSize="sm"> {userCity} </CText>
+              <CHeading size="lg"
+                >{{ profile.username }}, {{ profile.age }}</CHeading
+              >
+              <CText fontSize="sm">
+                {{ profile.location.label.split(",")[0] }}
+              </CText>
             </CBox>
             <CIconButton
               icon="circle-info"
@@ -78,10 +82,7 @@
           </CFlex>
           <CCollapse :isOpen="showDescription" v-if="removeFirstShow">
             <CText px="1rem" pb="1rem">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis,
-              maiores quidem praesentium sapiente quasi odit at fugiat, labore
-              quos optio voluptates ipsum commodi eos dolor quis autem quam ut
-              neque?
+              {{ profile.description }}
             </CText>
           </CCollapse>
         </CBox>
@@ -118,7 +119,7 @@ export default {
   data() {
     return {
       showDescription: false,
-      photos: [0, 1, 2, 3],
+      photos: [],
       showPhotoNumber: 0,
       removeFirstShow: false,
     };
@@ -127,16 +128,22 @@ export default {
   methods: {
     prevPhoto() {
       if (this.showPhotoNumber > 0) {
-        console.log("low");
         this.showPhotoNumber--;
       }
     },
 
     nextPhoto() {
-      if (this.showPhotoNumber < 3) {
+      if (this.showPhotoNumber < this.photos.length - 1) {
         this.showPhotoNumber++;
       }
     },
+  },
+
+  props: ["profile"],
+
+  mounted() {
+    console.log("cardProfile");
+    this.photos = this.profile.beers.map((b) => b.link);
   },
 
   watch: {
