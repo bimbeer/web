@@ -1,19 +1,34 @@
 import {
   collection,
   addDoc,
-  getDocs,
+  getDoc,
+  doc,
   query,
   orderBy,
   startAt,
   endAt,
+  setDoc,
 } from "firebase/firestore";
 
 import { db } from "@/firebase";
+import { getItem, setItem } from "../helpers/localStorage";
 
 const colRef = collection(db, "profile");
 
 export async function addProfile(profile) {
-  const docRef = await addDoc(colRef, { ...profile.getAllData() });
+  const user = getItem("user");
+  if (!user) return;
+
+  const userDocRef = doc(colRef, user.uid);
+  const docRef = await setDoc(userDocRef, { ...profile.getAllData() });
+  console.log(docRef);
 }
 
-export async function getProfile() {}
+export async function getProfile(userId) {
+  const userDocRef = doc(colRef, userId);
+  const docSnap = await getDoc(userDocRef);
+  console.log(docSnap.data());
+  if (docSnap.exists()) {
+    setItem(docSnap.data(), "myProfile");
+  }
+}

@@ -11,18 +11,14 @@
               color="yellow"
               mr="1rem"
               @change="profile.searchGlobal = !profile.searchGlobal"
-              :defaultValue="profile.searchGlobal"
+              :isChecked="profile.searchGlobal"
             />
-            <CFormLabel v-if="profile.searchGlobal"
+            <CFormLabel v-if="!profile.searchGlobal"
               >Search profile in radius</CFormLabel
             >
             <CFormLabel v-else>Search profile globaly</CFormLabel>
           </CFormControl>
-          <CCollapse
-            mt="1rem"
-            :isOpen="profile.searchGlobal"
-            v-if="removeFirstShow"
-          >
+          <CCollapse mt="1rem" :isOpen="!profile.searchGlobal">
             <CFormControl id="range">
               <CFormLabel>
                 Radius <strong>{{ profile.range }}</strong> km
@@ -67,7 +63,7 @@
             w="50%"
             variantColor="yellow"
           >
-            Create
+            {{ getItem("myProfile") ? "Update" : "Create" }}
           </CButton>
         </CFlex>
       </template>
@@ -79,6 +75,7 @@
 import Card from "@/components/Card.vue";
 import ProfileLocationCity from "./ProfileLocationCity.vue";
 import Validator from "@/helpers/Validator";
+import { getItem } from "@/helpers/localStorage";
 
 import {
   CCollapse,
@@ -133,6 +130,7 @@ export default {
   },
 
   methods: {
+    getItem,
     handleNextStep() {
       this.errors.city = { status: false, message: "" };
       if (this.validator.isEmpty(this.profile.getLocation()?.label)) {

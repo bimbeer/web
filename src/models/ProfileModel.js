@@ -10,7 +10,7 @@ export default class ProfileModel {
   description = "";
   gender = "";
   interest = null;
-  searchGlobal = false;
+  searchGlobal = true;
   range = 0;
   #location = {};
   #beers = [];

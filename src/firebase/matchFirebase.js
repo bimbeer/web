@@ -1,66 +1,126 @@
 import {
   collection,
   addDoc,
-  getDocs,
+  getDoc,
   query,
   orderBy,
   startAt,
   endAt,
+  where,
+  getDocs,
+  deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
-import { geohashQueryBounds, distanceBetween } from "geofire-common";
-import { getItem as myProfile } from "../helpers/localStorage";
-
+import { v4 as uuidv4 } from "uuid";
 import { db } from "@/firebase";
 
-const colRef = collection(db, "profile");
+const colRef = collection(db, "interactions");
 
-export async function getProfiles() {
-  const mP = myProfile("myProfile");
-  if (!mP) return;
-  console.log(mP);
-
-  let profiles = await getProfilesByRange(
-    mP.location.position.coordinates,
-    mP.range
-  );
-
-  console.log(profiles, "XD");
-
-  if (!profiles) return;
-  return profiles;
+export async function addPairs(currentProfileId, recipientProfileId, recType) {
+  const docRef = await addDoc(colRef, {
+    sender: currentProfileId,
+    recipient: recipientProfileId,
+    reactionType: recType,
+  });
+  console.log(recType, docRef);
 }
 
-async function getProfilesByRange(point, range) {
-  const radiusInM = range * 1000;
+export async function unpairUser(currentProfileId, recipientProfileId) {
+  const q1 = query(
+    colRef,
+    where("sender", "==", currentProfileId),
+    where("recipient", "==", recipientProfileId)
+  );
+  const q1Snap = await getDocs(q1);
 
-  const bounds = geohashQueryBounds(point, radiusInM);
-  const promises = [];
-
-  bounds.forEach((b) => {
-    const q = query(
-      colRef,
-      orderBy("location.position.geohash"),
-      startAt(b[0]),
-      endAt(b[1])
-    );
-    promises.push(getDocs(q));
+  q1Snap.forEach((doc) => {
+    deleteDoc(doc.ref);
   });
 
-  return await Promise.all(promises)
-    .then((snapshots) => {
-      const matchingDocs = [];
-      snapshots.map((snap) => {
-        snap.forEach((doc) => {
-          const docPoint = doc.data().location?.position?.coordinates;
-          const distanceInM = distanceBetween(docPoint, point) * 1000;
-          if (distanceInM <= radiusInM)
-            matchingDocs.push({ ...doc.data(), id: doc.id });
-        });
-      });
-      return matchingDocs;
-    })
-    .then((matchingDocs) => {
-      return matchingDocs;
+  const q2 = query(
+    colRef,
+    where("sender", "==", recipientProfileId),
+    where("recipient", "==", currentProfileId)
+  );
+  const q2Snap = await getDocs(q2);
+
+  q2Snap.forEach((doc) => {
+    deleteDoc(doc.ref);
+  });
+
+  return "xd";
+}
+
+export async function checkMatch(
+  currentProfileId,
+  recipientProfileId,
+  recType
+) {
+  const q1 = query(
+    colRef,
+    where("sender", "==", currentProfileId),
+    where("recipient", "==", recipientProfileId),
+    where("reactionType", "==", "like")
+  );
+  const q1Snap = await getDocs(q1);
+
+  const q2 = query(
+    colRef,
+    where("sender", "==", recipientProfileId),
+    where("recipient", "==", currentProfileId),
+    where("reactionType", "==", "like")
+  );
+
+  const q2Snap = await getDocs(q2);
+
+  if (q1Snap.empty && q2Snap.empty) {
+    addPairs(currentProfileId, recipientProfileId, recType);
+    return;
+  }
+  createPair(q1Snap, q2Snap);
+}
+
+async function createPair(q1Snap, q2Snap) {
+  const pairId = uuidv4();
+  if (!q1Snap.empty) {
+    q1Snap.forEach(async (doc) => {
+      await updateDoc(doc.ref, { pairId });
     });
+  }
+  if (!q2Snap.empty) {
+    q2Snap.forEach(async (doc) => {
+      await updateDoc(doc.ref, { pairId });
+    });
+  }
+}
+
+export async function getAllLike(currentProfileId) {
+  const profilesId = [];
+  const q1 = query(
+    colRef,
+    where("sender", "==", currentProfileId),
+    where("reactionType", "==", "like")
+  );
+
+  const q1Snap = await getDocs(q1);
+
+  const q2 = query(
+    colRef,
+    where("recipient", "==", currentProfileId),
+    where("reactionType", "==", "like")
+  );
+
+  const q2Snap = await getDocs(q2);
+
+  q1Snap.forEach((doc) => {
+    profilesId.push(doc.data().recipient);
+  });
+
+  q2Snap.forEach((doc) => {
+    profilesId.push(doc.data().sender);
+  });
+
+  console.log(profilesId);
+  return profilesId;
 }

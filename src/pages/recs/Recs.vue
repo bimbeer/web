@@ -1,6 +1,10 @@
 <template>
   <CFlex justify="center" align="center" direction="column">
-    <CardProfile :profile="profile" v-if="profile" />
+    <CardProfile
+      :profile="profile"
+      v-if="profile && profileNumber < profiles.length - 1"
+    />
+    <CBox v-else>No new profiles</CBox>
     <CBox>
       <CFlex align="center" justify="center" gap="12" p="3rem">
         <CIconButton
@@ -40,7 +44,9 @@
 import { CBox, CFlex, CStack, CIconButton } from "@chakra-ui/vue";
 import CardProfile from "@/components/CardProfile.vue";
 import { getProfiles } from "@/firebase/profilesFirebase.js";
-import { onBeforeMount } from "vue";
+import { checkMatch, getAllLike } from "@/firebase/matchFirebase.js";
+import { getItem } from "@/helpers/localStorage.js";
+import { getPairsProfiles } from "@/firebase/pairFirebase.js";
 
 export default {
   name: "Recs",
@@ -61,6 +67,10 @@ export default {
   },
 
   methods: {
+    checkMatch,
+    getItem,
+    getAllLike,
+    getPairsProfiles,
     nextProfile() {
       if (this.profileNumber < this.profiles.length - 1) {
         this.profileNumber++;
@@ -69,15 +79,17 @@ export default {
       }
     },
     like() {
+      const myProfile = getItem("user");
+      checkMatch(myProfile.uid, this.profile.id, "like");
       this.nextProfile();
       console.log("Like");
     },
     notLike() {
+      const myProfile = getItem("user");
+      checkMatch(myProfile.uid, this.profile.id, "dislike");
       this.nextProfile();
-
       console.log("NotLike");
     },
-    async fetch() {},
   },
 
   async mounted() {

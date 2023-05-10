@@ -1,6 +1,7 @@
 import {
   collection,
   addDoc,
+  where,
   getDocs,
   query,
   orderBy,
@@ -9,24 +10,54 @@ import {
 } from "firebase/firestore";
 
 import { geohashQueryBounds, distanceBetween } from "geofire-common";
-import { getItem as myProfile } from "../helpers/localStorage";
+import { getItem } from "../helpers/localStorage";
 
 import { db } from "@/firebase";
 
 const colRef = collection(db, "profile");
+const intRef = collection(db, "interactions");
 
 export async function getProfiles() {
   let profiles = [];
-  const mP = myProfile("myProfile");
-  if (!mP) return;
+  const mP = await getItem("myProfile");
+  const currentUserId = await getItem("user").uid;
+  if (!mP || !currentUserId) return;
+
+  const q1 = query(intRef, where("sender", "==", currentUserId));
+  const q2 = query(intRef, where("recipient", "==", currentUserId));
+
+  const q1Snap = await getDocs(q1);
+  const q2Snap = await getDocs(q2);
+
+  const remProfileIds = [];
+  const filteredProfiles = [];
+
+  q1Snap.forEach((doc) => {
+    if (doc.data().sender === currentUserId)
+      remProfileIds.push(doc.data().recipient);
+    else remProfileIds.push(doc.data().sender);
+  });
+
+  q2Snap.forEach((doc) => {
+    if (doc.data().recipient === currentUserId)
+      remProfileIds.push(doc.data().sender);
+    else remProfileIds.push(doc.data().recipient);
+  });
 
   if (!mP.searchGlobal) {
+    console.log("xd");
     profiles = await getProfilesByRange(
       mP.location.position.coordinates,
       mP.range
     );
     profiles = getProfilesByBeers(profiles, mP);
-    return profiles;
+
+    profiles.forEach((p) => {
+      if (!remProfileIds.includes(p.id)) filteredProfiles.push(p);
+    });
+    console.log(filteredProfiles);
+
+    return filteredProfiles;
   }
 
   const profilesSnapshot = await getDocs(colRef);
@@ -35,7 +66,13 @@ export async function getProfiles() {
   );
 
   profiles = getProfilesByBeers(profiles, mP);
-  return profiles;
+
+  profiles.forEach((p) => {
+    if (!remProfileIds.includes(p.id)) filteredProfiles.push(p);
+  });
+
+  console.log(filteredProfiles);
+  return filteredProfiles;
 }
 
 function getProfilesByBeers(profiles, myProfile) {
