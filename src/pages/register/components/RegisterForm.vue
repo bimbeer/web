@@ -1,7 +1,7 @@
 <template>
   <CFlex justify="center" align="center">
     <Card>
-      <template #heading> Zarejestruj się </template>
+      <template #heading> Signup </template>
       <template #body>
         <CBox mb="1rem">
           <CFormControl id="email" :isInvalid="!errors.email.status">
@@ -9,7 +9,7 @@
             <CInput
               v-model="form.email"
               type="email"
-              placeholder="Wpisz adres email"
+              placeholder="Enter your email address"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
@@ -26,11 +26,11 @@
 
         <CBox mb="1rem">
           <CFormControl id="password" :isInvalid="!errors.password.status">
-            <CFormLabel>Hasło</CFormLabel>
+            <CFormLabel>Password</CFormLabel>
             <CInput
               v-model="form.password"
               type="password"
-              placeholder="Wpisz hasło"
+              placeholder="Enter password"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
@@ -50,11 +50,11 @@
             id="password-replay"
             :isInvalid="!errors.passwordReplay.status"
           >
-            <CFormLabel>Powtórz hasło</CFormLabel>
+            <CFormLabel>Repeat password</CFormLabel>
             <CInput
               v-model="form.passwordReplay"
               type="password"
-              placeholder="Powtórz hasło"
+              placeholder="Repeat your password"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
@@ -78,12 +78,12 @@
             :disabled="registerButtonDisable"
             @click="signUp(form.email, form.password)"
           >
-            Zarejestruj się
+            Signup
           </CButton>
         </CStack>
         <CText>
-          Masz już konto? Zaloguj się
-          <CLink as="router-link" to="/login" color="yellow.200"> tutaj </CLink>
+          Already have an account? Login
+          <CLink as="router-link" to="/login" color="yellow.200"> here </CLink>
           .
         </CText>
       </template>

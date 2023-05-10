@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <CBox>
+  <div v-if="getItem('user')">
+    <CBox v-if="getItem('myProfile')">
       <CIconButton
         icon="bars"
         @click="isOpen = true"
@@ -11,6 +11,17 @@
         :_hover="{ transform: 'scale(1.2)' }"
       />
     </CBox>
+    <CButton
+      v-else
+      size="sm"
+      variant-color="yellow"
+      variant="outline"
+      rounded="1rem"
+      :_hover="{ transform: 'scale(1.2)' }"
+      @click="log()"
+    >
+      Logout
+    </CButton>
 
     <CDrawer :isOpen="isOpen" placement="left" :on-close="close">
       <CDrawerOverlay />
@@ -31,15 +42,18 @@
             />
           </CFlex>
           <CFlex justify="space-between" align="center" direction="row">
-            <CText> {nickname} </CText>
+            <CText>{{
+              getItem("myProfile") ? getItem("myProfile").username : ""
+            }}</CText>
             <CButton
               size="sm"
               variant-color="yellow"
               variant="outline"
               rounded="1rem"
               :_hover="{ transform: 'scale(1.2)' }"
+              @click="log()"
             >
-              Wyloguj
+              Logout
             </CButton>
           </CFlex>
         </CDrawerHeader>
@@ -76,6 +90,8 @@
 
 <script>
 import links from "./NavigationDrawerLinks";
+import { logout } from "@/firebase/authFirebase.js";
+import { getItem } from "@/helpers/localStorage.js";
 
 import {
   CButton,
@@ -125,9 +141,16 @@ export default {
   },
 
   methods: {
+    log() {
+      logout();
+      this.$router.push({ name: "welcome" });
+      this.close();
+    },
     close() {
       this.isOpen = false;
     },
+    logout,
+    getItem,
   },
 
   watch: {

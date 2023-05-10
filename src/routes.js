@@ -6,21 +6,20 @@ import Message from "@/pages/message/Message.vue";
 import Profile from "@/pages/profile/Profile.vue";
 import Recs from "@/pages/recs/Recs.vue";
 import Register from "@/pages/register/Register.vue";
-import Geo from "@/pages/geo/Geo.vue";
 
 export default [
-  { path: "/", component: Welcome },
-  { path: "/login", component: Login },
-  { path: "/register", component: Register },
+  { name: "welcome", path: "/", component: Welcome },
+  { name: "login", path: "/login", component: Login },
+  { name: "register", path: "/register", component: Register },
   {
+    name: "main",
     path: "/main",
     component: Main,
     children: [
-      { path: "recs", component: Recs },
-      { path: "pair", component: Pair },
-      { path: "message", component: Message },
-      { path: "profile", component: Profile },
-      { path: "geo", component: Geo },
+      { name: "main/recs", path: "recs", component: Recs },
+      { name: "main/pair", path: "pair", component: Pair },
+      { name: "main/message", path: "message", component: Message },
+      { name: "main/profile", path: "profile", component: Profile },
     ],
   },
 ];

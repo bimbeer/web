@@ -8,7 +8,7 @@ export default class Validator {
 
     if (!email.includes("@") || !email.includes(".")) {
       result.status = false;
-      result.messageArray.push("Nieprawidłowy adres email");
+      result.messageArray.push("Incorrect e-mail address");
     }
 
     result.message = this.#arrayToString(result.messageArray);
@@ -20,22 +20,22 @@ export default class Validator {
 
     if (password.length < 8) {
       result.status = false;
-      result.messageArray.push("Hasło musi posiadać minimum 8 znaków");
+      result.messageArray.push("The password must have at least 8 characters");
     }
 
     if (!/[0-9]/.test(password)) {
       result.status = false;
-      result.messageArray.push("Hasło musi posiadać cyfrę");
+      result.messageArray.push("The password must contain a number");
     }
 
     if (!/[A-Z]/.test(password)) {
       result.status = false;
-      result.messageArray.push("Hasło musi posiadać dużą literę");
+      result.messageArray.push("The password must contain a capital letter");
     }
 
     if (!/[a-z]/.test(password)) {
       result.status = false;
-      result.messageArray.push("Hasło musi posiadać małą literę");
+      result.messageArray.push("The password must contain a lowercase letter");
     }
 
     result.message = this.#arrayToString(result.messageArray);
@@ -47,7 +47,7 @@ export default class Validator {
 
     if (password !== replayPassword) {
       result.status = false;
-      result.messageArray.push("Hasła nie są takie same");
+      result.messageArray.push("The passwords are not the same");
     }
 
     result.message = this.#arrayToString(result.messageArray);
