@@ -105,11 +105,6 @@ export default {
     this.profiles = await getProfiles();
     this.profile = this.profiles[this.profileNumber];
   },
-
-  async mounted() {
-    this.profiles = await getProfiles();
-    this.profile = this.profiles[this.profileNumber];
-  },
 };
 </script>
 
