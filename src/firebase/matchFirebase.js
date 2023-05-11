@@ -23,6 +23,7 @@ export async function addPairs(currentProfileId, recipientProfileId, recType) {
     recipient: recipientProfileId,
     reactionType: recType,
   });
+
 }
 
 export async function unpairUser(currentProfileId, recipientProfileId) {
@@ -120,6 +121,7 @@ export async function getAllLike(currentProfileId) {
   q2Snap.forEach((doc) => {
     profilesId.push(doc.data().sender);
   });
+
 
   return profilesId;
 }

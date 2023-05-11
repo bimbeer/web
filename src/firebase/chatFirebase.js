@@ -26,6 +26,7 @@ import { db } from "@/firebase";
 const msgRef = collection(db, "messages");
 
 export async function sendMessage(msg, pairId, currentUserId) {
+
   await addDoc(msgRef, {
     pairId: pairId,
     text: msg,
@@ -44,6 +45,7 @@ export async function getMessage(pairId, messages) {
   const unsubscribe = onSnapshot(q, (snapshot) => {
     snapshot.docChanges().forEach((change) => {
       if (change.type === "added") {
+
         messages.push(change.doc.data());
       }
     });

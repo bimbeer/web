@@ -45,6 +45,7 @@ export async function getProfiles() {
   // });
 
   if (!mP.searchGlobal) {
+
     profiles = await getProfilesByRange(
       mP.location.position.coordinates,
       mP.range
@@ -54,6 +55,7 @@ export async function getProfiles() {
     profiles.forEach((p) => {
       if (!remProfileIds.includes(p.id)) filteredProfiles.push(p);
     });
+
 
     return filteredProfiles;
   }
@@ -68,6 +70,7 @@ export async function getProfiles() {
   profiles.forEach((p) => {
     if (!remProfileIds.includes(p.id)) filteredProfiles.push(p);
   });
+
 
   return filteredProfiles;
 }

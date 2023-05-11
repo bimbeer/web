@@ -142,6 +142,7 @@ export default {
   props: ["profile"],
 
   mounted() {
+
     this.photos = this.profile.beers.map((b) => b.link);
   },
 

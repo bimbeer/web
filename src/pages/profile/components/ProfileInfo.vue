@@ -91,9 +91,11 @@
           <CFormControl id="gender" :isInvalid="errors.gender.status">
             <CFormLabel>Gender</CFormLabel>
             <CRadioGroup v-model="profile.gender">
+
               <CRadio value="Man">Male</CRadio>
               <CRadio value="Woman">Female</CRadio>
               <CRadio value="Other">Other</CRadio>
+
             </CRadioGroup>
             <CFormErrorMessage>{{ errors.gender.message }}</CFormErrorMessage>
           </CFormControl>
@@ -103,9 +105,11 @@
           <CFormControl id="intrested" :isInvalid="errors.interest.status">
             <CFormLabel>Intrested</CFormLabel>
             <CRadioGroup v-model="profile.interest">
+
               <CRadio value="Man">Male</CRadio>
               <CRadio value="Woman">Female</CRadio>
               <CRadio value="All">All</CRadio>
+
             </CRadioGroup>
             <CFormErrorMessage>{{ errors.interest.message }}</CFormErrorMessage>
           </CFormControl>
@@ -255,6 +259,7 @@ export default {
         };
         isErr = true;
       }
+
 
       if (isErr) return;
 

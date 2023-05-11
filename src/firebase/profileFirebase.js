@@ -21,11 +21,13 @@ export async function addProfile(profile) {
 
   const userDocRef = doc(colRef, user.uid);
   const docRef = await setDoc(userDocRef, { ...profile.getAllData() });
+
 }
 
 export async function getProfile(userId) {
   const userDocRef = doc(colRef, userId);
   const docSnap = await getDoc(userDocRef);
+
   if (docSnap.exists()) {
     setItem(docSnap.data(), "myProfile");
   }

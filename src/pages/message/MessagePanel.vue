@@ -22,7 +22,9 @@
         </CListItem>
       </CList>
       <CText v-if="!pairs" textAlign="center"
+
         >You don't have beer buddies yet</CText
+
       >
     </CFlex>
   </CFlex>

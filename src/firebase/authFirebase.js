@@ -27,7 +27,9 @@ export function signInWithGoogle() {
       if (getItem("myProfile")) document.location.href = "/main/recs";
       else document.location.href = "/main/profile";
     })
+
     .catch((error) => {});
+
 }
 
 export function signIn(email, password) {
@@ -56,10 +58,12 @@ export function signUp(email, password) {
 }
 
 async function addUserToDb(user) {
+
   const userDocRef = doc(db, "users", user.uid);
   const docRef = await setDoc(userDocRef, {
     emailAddress: user.email,
   });
+
 }
 
 export function logout() {
