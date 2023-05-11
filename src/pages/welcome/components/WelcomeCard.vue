@@ -27,7 +27,11 @@
           <CText fontSize="sm" textAlign="center">or</CText>
           <CDivider />
           <CBox pb="1rem" />
-          <CLink href="/?" is-external :_hover="{}">
+          <CLink
+            href="https://github.com/bimbeer/desktop/releases/tag/v1.0.0"
+            is-external
+            :_hover="{}"
+          >
             <CButton
               variant-color="yellow"
               variant="outline"

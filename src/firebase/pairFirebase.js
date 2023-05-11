@@ -69,7 +69,7 @@ export async function getPairsProfiles(profilesIds) {
     profiles.push({ ...doc.data(), id: doc.id });
   });
 
-  console.log(profiles);
+
   return profiles;
 }
 
@@ -137,6 +137,6 @@ export async function getPairs(profilesIds) {
   for (let i = 0; i < profiles.length; i++) {
     profiles[i] = { ...profiles[i], pairId: pairIds[i] };
   }
-  console.log(profiles);
+
   return profiles;
 }

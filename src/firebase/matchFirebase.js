@@ -23,7 +23,7 @@ export async function addPairs(currentProfileId, recipientProfileId, recType) {
     recipient: recipientProfileId,
     reactionType: recType,
   });
-  console.log(recType, docRef);
+
 }
 
 export async function unpairUser(currentProfileId, recipientProfileId) {
@@ -122,6 +122,6 @@ export async function getAllLike(currentProfileId) {
     profilesId.push(doc.data().sender);
   });
 
-  console.log(profilesId);
+
   return profilesId;
 }
