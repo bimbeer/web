@@ -5,42 +5,30 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../firebase";
-import { deleteItem, getItem, setItem } from "../helpers/localStorage";
-import { getProfile } from "./profileFirebase";
-
-import { doc, setDoc } from "firebase/firestore";
-
-import { db } from "@/firebase";
 
 const provider = new GoogleAuthProvider();
 
 export function signInWithGoogle() {
   // add error handler
   signInWithPopup(auth, provider)
-    .then(async (result) => {
+    .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
-      setItem(user, "user");
-      await addUserToDb(user);
-      await getProfile(user.uid);
-      if (getItem("myProfile")) document.location.href = "/main/recs";
-      else document.location.href = "/main/profile";
     })
     .catch((error) => {
-      console.log(error);
+      const code = error.code;
+      if (code === "auth/account-exists-with-different-credential")
+        console.log("User's email already exists");
     });
 }
 
 export function signIn(email, password) {
   // add error handler
   signInWithEmailAndPassword(auth, email, password)
-    .then(async (userCredential) => {
+    .then((userCredential) => {
       const user = userCredential.user;
-      setItem(user, "user");
-      await getProfile(user.uid);
-      if (getItem("myProfile")) document.location.href = "/main/recs";
-      else document.location.href = "/main/profile";
+      console.log(user);
     })
     .catch((error) => {
       console.log(error);
@@ -50,25 +38,9 @@ export function signIn(email, password) {
 export function signUp(email, password) {
   // add error handler
   createUserWithEmailAndPassword(auth, email, password).then(
-    async (userCredential) => {
+    (userCredential) => {
       const user = userCredential.user;
-      setItem(user, "user");
-      await addUserToDb(user);
-      document.location.href = "/main/profile";
+      console.log(user);
     }
   );
-}
-
-async function addUserToDb(user) {
-  console.log(user);
-  const userDocRef = doc(db, "users", user.uid);
-  const docRef = await setDoc(userDocRef, {
-    emailAddress: user.email,
-  });
-  console.log(docRef);
-}
-
-export function logout() {
-  deleteItem("user");
-  deleteItem("myProfile");
 }

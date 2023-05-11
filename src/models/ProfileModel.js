@@ -1,37 +1,20 @@
 import Normalizer from "@/helpers/Normalizer";
-import { getItem } from "../helpers/localStorage";
 
 export default class ProfileModel {
   firstName = "";
   lastName = "";
   username = "";
-  age = 18;
+  age = null;
   avatar = "";
   description = "";
   gender = "";
   interest = null;
-  searchGlobal = true;
-  range = 0;
+  searchGlobal = null;
+  range = null;
   #location = {};
   #beers = [];
 
-  constructor() {
-    if (getItem("myProfile")) {
-      const myProfile = getItem("myProfile");
-      this.firstName = myProfile.firstName;
-      this.lastName = myProfile.lastName;
-      this.username = myProfile.username;
-      this.age = myProfile.age;
-      this.avatar = myProfile.avatar;
-      this.description = myProfile.description;
-      this.gender = myProfile.gender;
-      this.interest = myProfile.interest;
-      this.searchGlobal = myProfile.searchGlobal;
-      this.range = myProfile.range;
-      this.#location = myProfile.location;
-      this.#beers = myProfile.beers;
-    }
-  }
+  constructor() {}
 
   setLocation(location) {
     this.#location = location;
@@ -62,8 +45,8 @@ export default class ProfileModel {
   getAllData() {
     return {
       ...this,
-      beers: this.getLikedBeers().map((lb) => ({ ...lb })),
-      location: { ...this.getLocation() },
+      beers: this.getLikedBeers(),
+      location: this.getLocation(),
     };
   }
 }

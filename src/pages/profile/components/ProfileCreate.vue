@@ -20,15 +20,12 @@
 import Card from "@/components/Card.vue";
 import { CBox, CButton, CFlex, CIcon } from "@chakra-ui/vue";
 import { addProfile } from "@/firebase/profileFirebase";
-import { setItem as myProfile } from "@/helpers/localStorage";
 
 export default {
   components: { CButton, Card, CFlex, CBox, CIcon },
   props: ["profile"],
   mounted() {
     addProfile(this.profile);
-    myProfile(this.profile.getAllData(), "myProfile");
-    this.$router.push({ path: "/main/recs" });
   },
 };
 </script>

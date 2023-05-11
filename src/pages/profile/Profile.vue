@@ -1,25 +1,25 @@
 <template>
   <div>
     <ProfileInfo :profile="profile" :nextStep="nextStep" v-if="step === 1" />
-    <!-- <ProfileAvatar
-      :profile="profile"
-      :nextStep="nextStep"
-      :prevStep="prevStep"
-      v-if="step === 2"
-    /> -->
-    <ProfileBeers
+    <ProfileAvatar
       :profile="profile"
       :nextStep="nextStep"
       :prevStep="prevStep"
       v-if="step === 2"
     />
-    <ProfileLocation
+    <ProfileBeers
       :profile="profile"
       :nextStep="nextStep"
       :prevStep="prevStep"
       v-if="step === 3"
     />
-    <ProfileCreate :profile="profile" v-if="step === 4" />
+    <ProfileLocation
+      :profile="profile"
+      :nextStep="nextStep"
+      :prevStep="prevStep"
+      v-if="step === 4"
+    />
+    <ProfileCreate :profile="profile" v-if="step === 5" />
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
 
   data() {
     return {
-      step: 1,
+      step: 5,
       profile: new ProfileModel(),
     };
   },
