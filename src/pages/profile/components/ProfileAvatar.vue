@@ -84,9 +84,7 @@ export default {
 
   methods: {
     handleAvatar(e) {
-      console.log(e.target.files[0]);
       this.localFileUrl = URL.createObjectURL(e.target.files[0]);
-      console.log(this.localFileUrl);
     },
 
     handleAvatarSelect() {

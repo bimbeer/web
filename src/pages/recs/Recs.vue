@@ -81,7 +81,7 @@ export default {
     showToast() {
       this.$toast({
         title: "We have a beer buddy!",
-        description: 'You can check it out in the "Beer buddys" tab',
+        description: 'You can check it out in the "Beer buddies" tab',
         status: "info",
         duration: 5000,
       });
@@ -89,16 +89,13 @@ export default {
     async like() {
       const myProfile = getItem("user");
       const match = await checkMatch(myProfile.uid, this.profile.id, "like");
-      console.log(match);
       if (match) this.showToast();
       this.nextProfile();
-      console.log("Like");
     },
     async notLike() {
       const myProfile = getItem("user");
       const match = await checkMatch(myProfile.uid, this.profile.id, "dislike");
       this.nextProfile();
-      console.log("NotLike");
     },
   },
 

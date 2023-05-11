@@ -91,9 +91,9 @@
           <CFormControl id="gender" :isInvalid="errors.gender.status">
             <CFormLabel>Gender</CFormLabel>
             <CRadioGroup v-model="profile.gender">
-              <CRadio value="man">Male</CRadio>
-              <CRadio value="woman">Female</CRadio>
-              <CRadio value="other">Other</CRadio>
+              <CRadio value="Man">Male</CRadio>
+              <CRadio value="Woman">Female</CRadio>
+              <CRadio value="Other">Other</CRadio>
             </CRadioGroup>
             <CFormErrorMessage>{{ errors.gender.message }}</CFormErrorMessage>
           </CFormControl>
@@ -103,9 +103,9 @@
           <CFormControl id="intrested" :isInvalid="errors.interest.status">
             <CFormLabel>Intrested</CFormLabel>
             <CRadioGroup v-model="profile.interest">
-              <CRadio value="man">Male</CRadio>
-              <CRadio value="woman">Female</CRadio>
-              <CRadio value="all">All</CRadio>
+              <CRadio value="Man">Male</CRadio>
+              <CRadio value="Woman">Female</CRadio>
+              <CRadio value="All">All</CRadio>
             </CRadioGroup>
             <CFormErrorMessage>{{ errors.interest.message }}</CFormErrorMessage>
           </CFormControl>
@@ -256,12 +256,9 @@ export default {
         isErr = true;
       }
 
-      // implement check if username is in database
-
       if (isErr) return;
 
       this.profile.normalize();
-      console.log(this.profile);
 
       this.nextStep();
     },

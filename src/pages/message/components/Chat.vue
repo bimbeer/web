@@ -1,7 +1,7 @@
 <template>
   <CFlex w="100%" justify="center">
     <CFlex maxW="400px" w="100%" direction="column">
-      <CList maxH="50svh" overflowY="scroll" class="list" v-chat-scroll>
+      <CList maxH="70svh" overflowY="scroll" class="list" v-chat-scroll>
         <CListItem v-for="(msg, index) in messages" :key="index">
           <Message :msg="msg" />
         </CListItem>
@@ -68,7 +68,6 @@ export default {
   },
 
   async mounted() {
-    console.log(this.$route.params.pairId);
     await getMessage(this.$route.params.pairId, this.messages);
   },
 };

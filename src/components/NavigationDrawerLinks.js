@@ -5,7 +5,7 @@ export default [
   },
   {
     to: "/main/pair",
-    label: "Beer buddys",
+    label: "Beer buddies",
   },
   {
     to: "/main/message",
@@ -13,6 +13,6 @@ export default [
   },
   {
     to: "/main/profile",
-    label: "My profile",
+    label: "Profile",
   },
 ];

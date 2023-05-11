@@ -66,15 +66,6 @@
           >
             Login with Google
           </CButton>
-
-          <!-- <CButton
-            variant-color="yellow"
-            rounded="1rem"
-            size="lg"
-            variant="outline"
-          >
-            Zaloguj przez Facebook
-          </CButton> -->
         </CStack>
         <CBox mt="2rem">
           <CText>
@@ -149,15 +140,11 @@ export default {
       this.errors.email = this.validator.email(this.form.email);
     },
 
-    // verifyPassword() {
-    //   this.errors.password = this.validator.password(this.form.password);
-    // },
     loginButtonDisableSet() {
       if (!this.form.email || !this.form.password) {
         this.loginButtonDisable = true;
         return;
       }
-      // if (!this.errors.email.status || !this.errors.password.status) {
       if (!this.errors.email.status) {
         this.loginButtonDisable = true;
         return;
@@ -174,12 +161,11 @@ export default {
         this.loginButtonDisableSet();
       },
     },
-    // "form.password": {
-    //   handler() {
-    //     this.verifyPassword();
-    //     this.loginButtonDisableSet();
-    //   },
-    // },
+    "form.password": {
+      handler() {
+        this.loginButtonDisableSet();
+      },
+    },
   },
 };
 </script>

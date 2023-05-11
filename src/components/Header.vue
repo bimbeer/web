@@ -60,9 +60,7 @@ export default {
     };
   },
   methods: {
-    a(event) {
-      console.log(event);
-    },
+    a(event) {},
   },
 };
 </script>

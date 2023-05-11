@@ -128,7 +128,6 @@ export default {
 
   methods: {
     async fetchCities() {
-      console.log("fetch");
       await axios
         .get(
           `https://geocode.search.hereapi.com/v1/geocode?q=${
