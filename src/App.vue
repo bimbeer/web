@@ -20,6 +20,7 @@ export default {
     Header,
   },
   data() {
+    //conflicts
     return {
       mainStyles: {
         selectedMode: "",

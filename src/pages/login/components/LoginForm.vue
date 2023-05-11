@@ -1,7 +1,7 @@
 <template>
   <CFlex justify="center" align="center">
     <Card>
-      <template #heading> Zaloguj się </template>
+      <template #heading> Login </template>
       <template #body>
         <CBox mb="1rem">
           <CFormControl id="email" :isInvalid="!errors.email.status">
@@ -9,7 +9,7 @@
             <CInput
               v-model="form.email"
               type="email"
-              placeholder="Wpisz adres email"
+              placeholder="Enter your email address"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
@@ -26,11 +26,11 @@
 
         <CBox mb="1rem">
           <CFormControl id="password" :isInvalid="!errors.password.status">
-            <CFormLabel>Hasło</CFormLabel>
+            <CFormLabel>Password</CFormLabel>
             <CInput
               v-model="form.password"
               type="password"
-              placeholder="Wpisz hasło"
+              placeholder="Enter password"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
@@ -54,7 +54,7 @@
             :disabled="loginButtonDisable"
             @click="signIn(form.email, form.password)"
           >
-            Zaloguj
+            Login
           </CButton>
           <CBox p="0.5rem"></CBox>
           <CButton
@@ -64,23 +64,23 @@
             variant="outline"
             @click="signInWithGoogle"
           >
-            Zaloguj przez Google
+            Login with Google
           </CButton>
 
-          <CButton
+          <!-- <CButton
             variant-color="yellow"
             rounded="1rem"
             size="lg"
             variant="outline"
           >
             Zaloguj przez Facebook
-          </CButton>
+          </CButton> -->
         </CStack>
         <CBox mt="2rem">
           <CText>
-            Nie masz konta? Zarejestruj się
+            You do not have an account? Signup
             <CLink as="router-link" to="/register" color="yellow.200">
-              tutaj
+              here
             </CLink>
             .
           </CText>
@@ -149,15 +149,16 @@ export default {
       this.errors.email = this.validator.email(this.form.email);
     },
 
-    verifyPassword() {
-      this.errors.password = this.validator.password(this.form.password);
-    },
+    // verifyPassword() {
+    //   this.errors.password = this.validator.password(this.form.password);
+    // },
     loginButtonDisableSet() {
       if (!this.form.email || !this.form.password) {
         this.loginButtonDisable = true;
         return;
       }
-      if (!this.errors.email.status || !this.errors.password.status) {
+      // if (!this.errors.email.status || !this.errors.password.status) {
+      if (!this.errors.email.status) {
         this.loginButtonDisable = true;
         return;
       }
@@ -173,12 +174,12 @@ export default {
         this.loginButtonDisableSet();
       },
     },
-    "form.password": {
-      handler() {
-        this.verifyPassword();
-        this.loginButtonDisableSet();
-      },
-    },
+    // "form.password": {
+    //   handler() {
+    //     this.verifyPassword();
+    //     this.loginButtonDisableSet();
+    //   },
+    // },
   },
 };
 </script>

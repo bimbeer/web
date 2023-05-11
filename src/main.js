@@ -1,5 +1,6 @@
 // imports
 import Vue from "vue";
+import vueChatScroll from "vue-chat-scroll";
 import VueRouter from "vue-router";
 import Chakra, {
   CThemeProvider,
@@ -30,6 +31,8 @@ const router = new VueRouter({
 });
 
 Vue.use(VueRouter);
+
+Vue.use(vueChatScroll);
 
 Vue.use(VueAxios, axios);
 
