@@ -1,8 +1,5 @@
 <template>
-  <div>
-    The chat and messaging panel is under construction. Unfortunately, this task
-    with Vue was too much.
-  </div>
+  <div>Message page</div>
 </template>
 
 <script>

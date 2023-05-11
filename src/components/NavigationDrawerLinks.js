@@ -1,18 +1,23 @@
 export default [
   {
     to: "/main/recs",
-    label: "Main page",
+    label: "Strona główna",
   },
   {
     to: "/main/pair",
-    label: "Beer buddys",
+    label: "Pary",
   },
   {
     to: "/main/message",
-    label: "Messages",
+    label: "Wiadomości",
   },
   {
     to: "/main/profile",
-    label: "My profile",
+    label: "Mój profil",
+  },
+
+  {
+    to: "/main/geo",
+    label: "Geo",
   },
 ];

@@ -1,7 +1,7 @@
 <template>
   <CFlex justify="center" align="center">
     <Card>
-      <template #heading> Login </template>
+      <template #heading> Zaloguj się </template>
       <template #body>
         <CBox mb="1rem">
           <CFormControl id="email" :isInvalid="!errors.email.status">
@@ -9,7 +9,7 @@
             <CInput
               v-model="form.email"
               type="email"
-              placeholder="Enter your email address"
+              placeholder="Wpisz adres email"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
@@ -26,11 +26,11 @@
 
         <CBox mb="1rem">
           <CFormControl id="password" :isInvalid="!errors.password.status">
-            <CFormLabel>Password</CFormLabel>
+            <CFormLabel>Hasło</CFormLabel>
             <CInput
               v-model="form.password"
               type="password"
-              placeholder="Enter password"
+              placeholder="Wpisz hasło"
               p="1rem"
               rounded="1rem"
               mb="0.25rem"
@@ -54,7 +54,7 @@
             :disabled="loginButtonDisable"
             @click="signIn(form.email, form.password)"
           >
-            Login
+            Zaloguj
           </CButton>
           <CBox p="0.5rem"></CBox>
           <CButton
@@ -64,23 +64,23 @@
             variant="outline"
             @click="signInWithGoogle"
           >
-            Login with Google
+            Zaloguj przez Google
           </CButton>
 
-          <!-- <CButton
+          <CButton
             variant-color="yellow"
             rounded="1rem"
             size="lg"
             variant="outline"
           >
             Zaloguj przez Facebook
-          </CButton> -->
+          </CButton>
         </CStack>
         <CBox mt="2rem">
           <CText>
-            You do not have an account? Signup
+            Nie masz konta? Zarejestruj się
             <CLink as="router-link" to="/register" color="yellow.200">
-              here
+              tutaj
             </CLink>
             .
           </CText>

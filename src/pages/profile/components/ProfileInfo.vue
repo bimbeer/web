@@ -228,7 +228,6 @@ export default {
           status: true,
           message: `The description must contain at least ${minDescLen} characters`,
         };
-        isErr = true;
       }
 
       if (this.validator.isMoreThan(this.profile.description, maxDescLen)) {
@@ -236,12 +235,11 @@ export default {
           status: true,
           message: `The description can contain up to ${maxDescLen} characters`,
         };
-        isErr = true;
       }
 
       // implement check if username is in database
 
-      if (isErr) return;
+      // if (isErr) return;
 
       this.profile.normalize();
       console.log(this.profile);

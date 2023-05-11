@@ -2,14 +2,14 @@
   <CFlex justify="center" align="center">
     <Card>
       <template #heading>
-        Welcome to the Bimbeer website where you will find the perfect companion
-        for tasting the brewery.
+        Witaj na stronie Bimbeer gdzie znajdziesz idealnego kompana do
+        smakowania browaru.
       </template>
       <template #body>
         <CStack my="1rem">
           <CLink as="router-link" to="/login" :_hover="{}">
             <CButton variant-color="yellow" rounded="1rem" size="lg" w="100%">
-              Login
+              Zaloguj się
             </CButton>
           </CLink>
           <CLink as="router-link" to="/register" :_hover="{}">
@@ -19,12 +19,12 @@
               variant-color="yellow"
               variant="outline"
               w="100%"
-              >Signup</CButton
+              >Zarejestruj się</CButton
             >
           </CLink>
           <CBox pb="1rem" />
           <CDivider />
-          <CText fontSize="sm" textAlign="center">or</CText>
+          <CText fontSize="sm" textAlign="center">lub</CText>
           <CDivider />
           <CBox pb="1rem" />
           <CLink href="/?" is-external :_hover="{}">
@@ -34,7 +34,7 @@
               rounded="1rem"
               size="lg"
               w="100%"
-              >Download for PC</CButton
+              >Pobierz na komputer</CButton
             >
           </CLink>
           <CLink href="/?" is-external :_hover="{}">
@@ -44,7 +44,7 @@
               variant-color="yellow"
               variant="outline"
               w="100%"
-              >Download for smartphone</CButton
+              >Pobierz na smartfon</CButton
             >
           </CLink>
         </CStack>

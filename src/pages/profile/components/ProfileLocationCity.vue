@@ -175,7 +175,6 @@ export default {
 
   mounted() {
     this.debounceInput = useDebounceInput();
-    this.city = this.profile.getLocation().label;
   },
 };
 </script>
