@@ -12,7 +12,7 @@
 \renewcommand{\arraystretch}{1.4}
 
 \title{
-	Projektowanie i programowanie systemów internetowych II\\
+	Zaawansowane metody programowania\\
 	\Huge{Bimbeer}
 }
 
@@ -53,6 +53,7 @@
         \item Prettier - narzędzie do formatowania kodu, zapewniające spójny styl kodowania w całym projekcie.
     \end{itemize}
 
+    \subsection{Desktop}
 
     \begin{itemize}
         \item Electron - framework umożliwiający tworzenie aplikacji desktopowych przy użyciu technologii webowych.
@@ -67,6 +68,11 @@
         \item Prettier - narzędzie do formatowania kodu, zapewniające spójny styl kodowania w całym projekcie.
     \end{itemize}
 
+
+    \subsection{Mobile}
+
+
+    
     \section{Streszczenie wykorzystanych wzorców projektowych}
     \subsection{WEB}
     \begin{itemize}
@@ -84,10 +90,15 @@
         \item Komponenty prezentacyjne i kontenerowe (Presentational and container components) - wzorzec polegający na oddzieleniu logiki zarządzania stanem i danymi od prezentacji.
         \item Singleton - wzorzec pozwalający zapewnienie istnienia wyłącznie jednej instancji danej klasy.
     \end{itemize}
+    \subsection{Mobile}
 
+
+    
     \section{Instrukcja lokalnego i zdalnego uruchomienia}
         \subsection{WEB}
-        \subsubsection{lokalnie}
+        \subsubsection{Uruchomienie systemu}
+        \begin{itemize}
+            \item Lokalnie
             \begin{itemize}
                 \item Zainstaluj Node.js
                 \item Zainstaluj klienta Git
@@ -105,12 +116,20 @@
                 \end{lstlisting}
             \end{itemize}
             Po tych krokach powinna uruchomić się przeglądarka internetowa z adresem \textbf{localhost:3000} i po chwili wyświetlić stronę startową projektu.
+        \end{itemize}
+        
+            
 
-\subsubsection{zdalnie}
-    Wystarczy przejść na stronę                 \begin{lstlisting}
+\begin{itemize}
+    \item Zdalnie
+    \begin{itemize}
+        \item Wystarczy przejść na stronę                 \begin{lstlisting}
     https://bimbeer.vercel.app/
                 \end{lstlisting}
                 a aplikacja otworzy się w oknie przeglądarki
+    \end{itemize}
+\end{itemize}
+    
             \subsection{Desktop}
     \subsubsection{Uruchomienie testów}
     \begin{itemize}
@@ -129,6 +148,7 @@
     \item Otwarcie repozytorium: https://github.com/bimbeer/desktop
     \item Przejście do zakładki Actions
     \item Otwarcie workflow’u testowego Node.js CI
+\end{itemize}
 \end{itemize}
 \subsubsection{Uruchomienie systemu}
 \begin{itemize}
@@ -161,19 +181,33 @@
 \end{itemize}
 
 
+      \subsection{Mobile}
+        \subsubsection{Uruchomienie systemu}
+        \begin{itemize}
+            \item Lokalnie
+            \begin{itemize}
+            \end{itemize}
+        \end{itemize}
+        
+            
 
-
-
-
-
+\begin{itemize}
+    \item Zdalnie
+    \begin{itemize}
     \end{itemize}
+\end{itemize}
+    
+
+
+
+
 
     \section{Wnioski projektowe}
     Proces tworzenia systemu okazał się dużym wyzwaniem pod względem wymagań funkcjonalnych. Projektowanie systemu obejmującego trzy platformy: webową, desktopową i mobilną wymagało od naszej drużyny starannego planowania i koordynacji działań. Musieliśmy wziąć pod uwagę różnice między platformami i zapewnić spójność doświadczenia użytkownika na wszystkich z nich.
 Jednym z kluczowych wyzwań było zapoznanie się z nieznanymi nam wcześniej platformami i technologiami. Musieliśmy szybko nauczyć się nowych narzędzi i metod pracy, aby sprostać wymaganiom projektu. Dodatkowo musieliśmy pilnować by przestrzegać zasady czystego kodu oraz stosować wzorce projektowe i dobre praktyki w celu zapewnienia skalowalności i łatwości utrzymania kodu.
 Podczas tworzenia projektu mieliśmy okazję wzmocnić kompetencje miękkie, takie jak: umiejętność pracy w zespole, komunikatywność, samodyscyplina, kreatywność, a także cierpliwość i wytrwałość, które były niezwykle kluczowe w najtrudniejszych momentach tworzenia systemu.
-Komunikacja w zespole była kluczowa dla sukcesu projektu. Głównym narzędziem komunikacji był Discord, który umożliwił nam skuteczne dzielenie się informacjami i koordynowanie działań. Dzięki temu udało nam się zrealizować projekt na czas i zgodnie z oczekiwaniami naszych klientów.
-Podsumowując, proces tworzenia systemu dla trzech platform był pełen wyzwań, ale dzięki starannemu planowaniu, zastosowaniu dobrych praktyk i skutecznej komunikacji w zespole udało nam się osiągnąć sukces.
+Komunikacja w zespole była kluczowa dla sukcesu projektu. Głównym narzędziem komunikacji był Discord, który umożliwił nam skuteczne dzielenie się informacjami i koordynowanie działań. Dzięki temu udało nam się zrealizować projekt na czas i zgodnie z oczekiwaniami.
+Podsumowując, proces tworzenia systemu dla trzech platform był pełen wyzwań, ale dzięki starannemu planowaniu, zastosowaniu dobrych praktyk i skutecznej komunikacji w zespole udało nam się doprowadzić projekt do końca.
 
 
 \end{document}
