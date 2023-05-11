@@ -27,7 +27,7 @@ export async function getProfiles() {
   const q2 = query(intRef, where("recipient", "==", currentUserId));
 
   const q1Snap = await getDocs(q1);
-  const q2Snap = await getDocs(q2);
+  // const q2Snap = await getDocs(q2);
 
   const remProfileIds = [];
   const filteredProfiles = [];
@@ -38,11 +38,11 @@ export async function getProfiles() {
     else remProfileIds.push(doc.data().sender);
   });
 
-  q2Snap.forEach((doc) => {
-    if (doc.data().recipient === currentUserId)
-      remProfileIds.push(doc.data().sender);
-    else remProfileIds.push(doc.data().recipient);
-  });
+  // q2Snap.forEach((doc) => {
+  //   if (doc.data().recipient === currentUserId)
+  //     remProfileIds.push(doc.data().sender);
+  //   else remProfileIds.push(doc.data().recipient);
+  // });
 
   if (!mP.searchGlobal) {
     console.log("xd");
@@ -78,6 +78,7 @@ export async function getProfiles() {
 function getProfilesByBeers(profiles, myProfile) {
   let p = [];
 
+  if (!profiles) return;
   profiles.forEach((profile) => {
     for (let i = 0; i < profile.beers.length; i++) {
       if (myProfile.beers.indexOf(profile.beers[i].name)) {

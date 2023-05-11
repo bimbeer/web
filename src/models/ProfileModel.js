@@ -9,7 +9,7 @@ export default class ProfileModel {
   avatar = "";
   description = "";
   gender = "";
-  interest = null;
+  interest = "";
   searchGlobal = true;
   range = 0;
   #location = {};

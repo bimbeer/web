@@ -1,9 +1,6 @@
 <template>
   <CFlex justify="center" align="center" direction="column">
-    <CardProfile
-      :profile="profile"
-      v-if="profile && profileNumber < profiles.length - 1"
-    />
+    <CardProfile :profile="profile" v-if="profile && show" />
     <CBox v-else>No new profiles</CBox>
     <CBox>
       <CFlex align="center" justify="center" gap="12" p="3rem">
@@ -63,6 +60,7 @@ export default {
       profiles: [],
       profile: null,
       profileNumber: 0,
+      show: true,
     };
   },
 
@@ -76,17 +74,29 @@ export default {
         this.profileNumber++;
         this.profile = this.profiles[this.profileNumber];
         return;
+      } else {
+        this.show = false;
       }
     },
-    like() {
+    showToast() {
+      this.$toast({
+        title: "We have a beer buddy!",
+        description: 'You can check it out in the "Beer buddys" tab',
+        status: "info",
+        duration: 5000,
+      });
+    },
+    async like() {
       const myProfile = getItem("user");
-      checkMatch(myProfile.uid, this.profile.id, "like");
+      const match = await checkMatch(myProfile.uid, this.profile.id, "like");
+      console.log(match);
+      if (match) this.showToast();
       this.nextProfile();
       console.log("Like");
     },
-    notLike() {
+    async notLike() {
       const myProfile = getItem("user");
-      checkMatch(myProfile.uid, this.profile.id, "dislike");
+      const match = await checkMatch(myProfile.uid, this.profile.id, "dislike");
       this.nextProfile();
       console.log("NotLike");
     },

@@ -82,11 +82,9 @@ export default {
           return;
         }
       }
-      if (this.selectNumber < 3) {
-        this.profile.addLikeBeer(new LikeBeerModel(beerLink, beerName));
-        this.selectList.push(beerName);
-        this.selectNumber = this.selectList.length;
-      }
+      this.profile.addLikeBeer(new LikeBeerModel(beerLink, beerName));
+      this.selectList.push(beerName);
+      this.selectNumber = this.selectList.length;
     },
   },
   mounted() {

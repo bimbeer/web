@@ -76,9 +76,10 @@ export async function checkMatch(
 
   if (q1Snap.empty && q2Snap.empty) {
     addPairs(currentProfileId, recipientProfileId, recType);
-    return;
+    return false;
   }
-  createPair(q1Snap, q2Snap);
+  await createPair(q1Snap, q2Snap);
+  return true;
 }
 
 async function createPair(q1Snap, q2Snap) {

@@ -91,11 +91,23 @@
           <CFormControl id="gender" :isInvalid="errors.gender.status">
             <CFormLabel>Gender</CFormLabel>
             <CRadioGroup v-model="profile.gender">
-              <CRadio value="male">Male</CRadio>
-              <CRadio value="female">Female</CRadio>
+              <CRadio value="man">Male</CRadio>
+              <CRadio value="woman">Female</CRadio>
               <CRadio value="other">Other</CRadio>
             </CRadioGroup>
             <CFormErrorMessage>{{ errors.gender.message }}</CFormErrorMessage>
+          </CFormControl>
+        </CBox>
+
+        <CBox mb="1rem">
+          <CFormControl id="intrested" :isInvalid="errors.interest.status">
+            <CFormLabel>Intrested</CFormLabel>
+            <CRadioGroup v-model="profile.interest">
+              <CRadio value="man">Male</CRadio>
+              <CRadio value="woman">Female</CRadio>
+              <CRadio value="all">All</CRadio>
+            </CRadioGroup>
+            <CFormErrorMessage>{{ errors.interest.message }}</CFormErrorMessage>
           </CFormControl>
         </CBox>
 
@@ -160,6 +172,11 @@ const cleanErrors = {
     message: "",
   },
   gender: {
+    status: false,
+    message: "",
+  },
+
+  interest: {
     status: false,
     message: "",
   },
